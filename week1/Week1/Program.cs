@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Week1
 {
@@ -15,7 +16,8 @@ namespace Week1
             Exercise4();
 
             Exercise5();
-             
+
+            Exercise12();
         }
 
         //1. Write a C# Sharp program that takes three letters as input and display them in reverse order.
@@ -54,7 +56,7 @@ namespace Week1
             Console.Write("Input second number:");
             var secondNumber = Convert.ToInt32(Console.ReadLine());
 
-            var result = 0;
+            double result = 0;
             switch (operatie)
             {
                 case '+':
@@ -73,7 +75,7 @@ namespace Week1
                     break;
 
                 case '/':
-                    result = firstNumber / secondNumber;
+                    result = (double) firstNumber / secondNumber;
                     Console.WriteLine($"{firstNumber} {operatie} {secondNumber} = {result}");
                     break;
 
@@ -157,6 +159,30 @@ namespace Week1
                 Console.Write("This is a scalene triangle.\n");
             }
         }
+
+        //12
+        private static void Exercise12()
+        {
+            Console.WriteLine("\n\n");
+            Console.WriteLine("Write a program in C# Sharp to insert New value in the array.\n");
+
+            //ARRAYs are boring I will use LISTs
+
+            List<int> integers = new List<int>() { 1, 8, 7, 10 };
+
+            integers.ForEach(item => Console.Write(item + " "));
+            Console.WriteLine("\n");
+
+            Console.Write("Input the value to be inserted : ");
+            var value = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Input the Position, where the value to be inserted : ");
+            var position = Convert.ToInt32(Console.ReadLine());
+
+            integers.Insert(position, value);
+            Console.WriteLine("After Insert the element the new list is :");
+            integers.ForEach(item => Console.Write(item + " "));
+        }
     }
-    
+
 }
