@@ -10,8 +10,11 @@ namespace Week1
             Exercise1();
 
             Exercise2();
+
+            Exercise3();
              
         }
+
 
         //1. Write a C# Sharp program that takes three letters as input and display them in reverse order.
         private static void Exercise1()
@@ -74,6 +77,34 @@ namespace Week1
 
                 default:
                     break;
+            }
+        }
+
+        //#3
+        private static void Exercise3()
+        {
+            Console.WriteLine();
+            Console.WriteLine("#3 Write a C# Sharp program that takes a character as " +
+                "input and check the input (lowercase) is a vowel, a digit, or any other symbol");
+
+            char ch;
+            ch = Convert.ToChar(Console.ReadLine().ToLower());
+            int i = ch;
+            if (i >= 48 && i <= 57)
+            {
+                Console.Write("It is a digit.");
+            }
+            else
+            {
+                string vowels = "aioue";
+                bool containsSearchResult = vowels.Contains(ch);
+                if (containsSearchResult)
+                {
+                    Console.WriteLine("It is a vowel");
+                } else
+                {
+                    Console.WriteLine("It is a symbol");
+                }
             }
         }
     }
