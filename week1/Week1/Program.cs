@@ -35,13 +35,46 @@ namespace Week1
         //2
         private static void Exercise2()
         {
-           /* Console.WriteLine("Write a C# Sharp program that takes two numbers as input and perform an " +
-               "operation (+,-,*,x,/) on them and displays the result of that operation.");
+            Console.WriteLine();
+            Console.WriteLine("#2 Write a C# Sharp program that takes two numbers as input and perform an " +
+               "operation (+,-,*,x,/) on them and displays the result of that operation.\n");
 
-            Console.WriteLine("Input first number:")
-            var firstNumber = Console.ReadLine();
-            var operatie    = Console.ReadLine();
-            var secondNumber = Console.ReadLine();*/
+            Console.Write("Input first number:");
+            var firstNumber = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Input operation:");
+            char operatie = Console.ReadKey().KeyChar;
+            Console.WriteLine();
+
+            Console.Write("Input second number:");
+            var secondNumber = Convert.ToInt32(Console.ReadLine());
+
+            var result = 0;
+            switch (operatie)
+            {
+                case '+':
+                    result = firstNumber + secondNumber;
+                    Console.WriteLine($"{firstNumber} {operatie} {secondNumber} = {result}");
+                    break;
+
+                case '-':
+                    result = firstNumber - secondNumber;
+                    Console.WriteLine($"{firstNumber} {operatie} {secondNumber} = {result}");
+                    break;
+
+                case '*':
+                    result = firstNumber * secondNumber;
+                    Console.WriteLine($"{firstNumber} {operatie} {secondNumber} = {result}");
+                    break;
+
+                case '/':
+                    result = firstNumber / secondNumber;
+                    Console.WriteLine($"{firstNumber} {operatie} {secondNumber} = {result}");
+                    break;
+
+                default:
+                    break;
+            }
         }
     }
 }
