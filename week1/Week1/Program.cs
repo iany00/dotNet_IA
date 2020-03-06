@@ -6,15 +6,17 @@ namespace Week1
     {
         static void Main(string[] args)
         {
-
             Exercise1();
 
             Exercise2();
 
             Exercise3();
+
+            Exercise4();
+
+            Exercise5();
              
         }
-
 
         //1. Write a C# Sharp program that takes three letters as input and display them in reverse order.
         private static void Exercise1()
@@ -107,5 +109,54 @@ namespace Week1
                 }
             }
         }
+            
+        //4
+        private static void Exercise4()
+        {
+            Console.WriteLine("4. Write a C# Sharp program to accept the " +
+                "height of a person in centimeter and categorize the person according to their height.");
+
+            Console.Write("Height:");
+            var height = Convert.ToInt32(Console.ReadLine());
+
+            if (height < 150)
+                Console.Write("The person is Dwarf. \n\n");
+            else if ((height >= 150.0) && (height <= 195.0))
+                Console.Write("The person is Tall. \n\n");
+            else
+                Console.Write("Abnormal.\n\n");
+        }
+
+        //5
+        private static void Exercise5()
+        {
+            Console.WriteLine("\n\n");
+            Console.WriteLine("Write a C# Sharp program to check whether a triangle is Equilateral, Isosceles or Scalene.");
+
+            int a, b, c;
+
+            Console.Write("Input side 1 of triangle: ");
+            a = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Input side 2 of triangle: ");
+            b = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Input side 3 of triangle: ");
+            c = Convert.ToInt32(Console.ReadLine());
+
+            if (a == b && b == c)
+            {
+                Console.Write("This is an equilateral triangle.\n");
+            }
+            else if (a == b || a == c || b == c)
+            {
+                Console.Write("This is an isosceles triangle.\n");
+            }
+            else
+            {
+                Console.Write("This is a scalene triangle.\n");
+            }
+        }
     }
+    
 }
