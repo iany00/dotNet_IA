@@ -16,7 +16,7 @@ namespace Homework_1
             int[] nums = new int[] { 1, 7, 5, 7, 7, 7, 6, 8, 2, 4, 7, 9, 7 };
             Console.WriteLine(String.Join(" ", nums));
 
-            var result = findMajority(nums);
+            var result = FindMajority(nums);
 
             if (result > 0)
             {
@@ -31,7 +31,7 @@ namespace Homework_1
         /*
          * Find the number that is in majority (more than 50% in the array/list)
          */
-        private static int findMajority(int[] arrayNums)
+        private static int FindMajority(int[] arrayNums)
         {
             // Array length
             int arrayLength = arrayNums.Length;

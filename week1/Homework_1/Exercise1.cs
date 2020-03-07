@@ -6,7 +6,7 @@ namespace Homework_1
 {
     class Exercise1
     {
-        internal static void run()
+        internal static void Run()
         {
             Console.WriteLine("1. Write a function to remove duplicate characters from String.");
             Console.Write("Enter a String : ");

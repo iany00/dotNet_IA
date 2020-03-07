@@ -6,13 +6,13 @@ namespace Homework_1
     {
         static void Main(string[] args)
         {
-            Exercise1.run();
+            Exercise1.Run();
 
             Exercise2.run();
 
-            Exercise3.run();
+            Exercise3.Run();
 
-            //Exercise4.run();
+            Exercise4.Run();
         }
 
     }

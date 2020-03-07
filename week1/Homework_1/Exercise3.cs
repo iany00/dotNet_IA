@@ -6,7 +6,7 @@ namespace Homework_1
 {
     class Exercise3
     {
-        internal static void run()
+        internal static void Run()
         {
             Console.WriteLine("3.Count the frequency of chars in a string.");
 
