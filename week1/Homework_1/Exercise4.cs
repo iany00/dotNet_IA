@@ -16,18 +16,21 @@ namespace Homework_1
             LinkedList<string> linkedList = new LinkedList<string>(words);
             DisplayList(linkedList, "The linked list values: ");
 
+
             // Simple reverse list
             LinkedList<string> reverseList = SimpleReverseList(linkedList);
             DisplayList(reverseList, "Linked list reverse order: ");
 
+
             // Create new list
             string[] rcwords = { "In", "Paduread", "Cu", "Alune"};
-            LinkedList<string> rclinkedList = new LinkedList<string>(rcwords);
-            DisplayList(rclinkedList, "The linked list values: ");
+            LinkedList<string> recLinkedList = new LinkedList<string>(rcwords);
+            DisplayList(recLinkedList, "The linked list values: ");
+
 
             // Recursive reverse
-            LinkedListNode<string> head         = rclinkedList.First;
-            LinkedList<string> recReverseList   = RecursiveReverseList(rclinkedList, head);
+            LinkedListNode<string> head         = recLinkedList.First;
+            LinkedList<string> recReverseList   = RecursiveReverseList(recLinkedList, head);
             DisplayList(recReverseList, "Linked list recursive reverse order: ");
 
             Console.WriteLine("\n");
@@ -35,18 +38,18 @@ namespace Homework_1
         }
 
         // recursive reverse
-        private static LinkedList<string> RecursiveReverseList(LinkedList<string> rclinkedList, LinkedListNode<string> head)
+        private static LinkedList<string> RecursiveReverseList(LinkedList<string> recLinkedList, LinkedListNode<string> head)
         {
             if (head.Next == null)
             {
-                return rclinkedList;
+                return recLinkedList;
             }
 
             var next = head.Next;
-            rclinkedList.Remove(next);
-            rclinkedList.AddFirst(next.Value);
+            recLinkedList.Remove(next);
+            recLinkedList.AddFirst(next.Value);
 
-            return RecursiveReverseList(rclinkedList, head);
+            return RecursiveReverseList(recLinkedList, head);
         }
 
         // Simple reverse

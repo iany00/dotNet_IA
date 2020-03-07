@@ -13,6 +13,8 @@ namespace Homework_1
             Exercise3.Run();
 
             Exercise4.Run();
+
+            Exercise5.Run();
         }
 
     }
