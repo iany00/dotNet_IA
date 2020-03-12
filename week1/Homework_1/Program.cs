@@ -6,17 +6,17 @@ namespace Homework_1
     {
         static void Main(string[] args)
         {
-            Exercise1.Run();
+            //Exercise1.Run();
 
-            Exercise2.run();
+            //Exercise2.run();
 
-            Exercise3.Run();
+            //Exercise3.Run();
 
-            Exercise4.Run();
+            //Exercise4.Run();
 
             Exercise5.Run();
 
-            Exercise6.Run();
+            //Exercise6.Run();
         }
 
     }

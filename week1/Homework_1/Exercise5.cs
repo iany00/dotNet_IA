@@ -4,6 +4,7 @@ using System.Text;
 
 namespace Homework_1
 {
+    //ok
     class Exercise5
     {
         internal static void Run()
@@ -11,7 +12,7 @@ namespace Homework_1
             Console.WriteLine("5.Write code to remove duplicates from an unsorted linked list.");
 
             // Create linked list
-            string[] words = { "5", "2", "5", "4", "5", "2", "7", "ana", "ana", "mere" };
+            string[] words = { "5", "2", "5", "4", "5", "2", "7", "ana", "ana", "mere", "ana" };
             LinkedList<string> linkedList = new LinkedList<string>(words);
             DisplayLinkedList.run(linkedList, "The linked list values: ");
 

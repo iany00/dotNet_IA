@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Homework_1
 {
+    // ok
     class Exercise2
     {
-        
         public static void run()
         {
             Console.WriteLine("2.Given an unsorted array which has a number in " +

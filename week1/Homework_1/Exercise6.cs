@@ -4,6 +4,7 @@ using System.Text;
 
 namespace Homework_1
 {
+    // ok
     class Exercise6
     {
         internal static void Run()
