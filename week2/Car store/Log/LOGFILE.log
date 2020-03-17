@@ -1,2 +1,35 @@
-﻿2020-03-16 11:38:02.763 ../../../Log/LOGFILE.log is created.
-2020-03-16 11:38:02.771 [INFO]    test
+﻿2020-03-16 15:09:57.661 [INFO]    Order car from Ford Store?
+2020-03-16 15:09:57.667 [INFO]    FordStore Order details:
+2020-03-16 15:09:57.667 [INFO]    ________________
+2020-03-16 15:09:57.668 [INFO]    Name: Alex
+2020-03-16 15:09:57.669 [INFO]    Age: 27
+2020-03-16 15:09:57.669 [INFO]    ________________
+2020-03-16 15:09:57.670 [INFO]    Model: Ford Focus
+2020-03-16 15:09:57.671 [INFO]    Year: 2015
+2020-03-16 15:09:57.671 [INFO]    Producer: Ford Motors Company
+2020-03-16 15:09:57.672 [INFO]    Price: 15000 Euro
+2020-03-16 15:09:57.673 [INFO]    Order date: 16-Mar-20 15:09:57
+2020-03-16 15:09:57.673 [INFO]    Deliver date: 13-Apr-20 15:09:57
+2020-03-16 15:09:57.674 [INFO]    Payment made: NO
+2020-03-16 15:09:57.674 [INFO]    
+
+2020-03-16 15:09:57.674 [INFO]    Order car from Scoda Store?
+2020-03-16 15:09:57.675 [INFO]    ScodaStore Order details:
+2020-03-16 15:09:57.675 [INFO]    ________________
+2020-03-16 15:09:57.675 [INFO]    Name: Alex
+2020-03-16 15:09:57.676 [INFO]    Age: 27
+2020-03-16 15:09:57.676 [INFO]    ________________
+2020-03-16 15:09:57.676 [INFO]    Model: Ford Focus
+2020-03-16 15:09:57.677 [INFO]    Year: 2015
+2020-03-16 15:09:57.677 [INFO]    Producer: Ford Motors Company
+2020-03-16 15:09:57.677 [INFO]    Price: 14000 Euro
+2020-03-16 15:09:57.678 [INFO]    Order date: 16-Mar-20 15:09:57
+2020-03-16 15:09:57.678 [INFO]    Deliver date: 06-Apr-20 15:09:57
+2020-03-16 15:09:57.679 [INFO]    Payment made: NO
+2020-03-16 15:09:57.679 [INFO]    
+
+2020-03-16 15:09:57.679 [INFO]    Cancel Ford Store order?
+2020-03-16 15:09:57.680 [INFO]    Car order canceled!
+2020-03-16 15:09:57.681 [INFO]    
+
+2020-03-16 15:09:57.681 [INFO]    3 weeks has passed Scoda Store deliverd your car. Payment has been made. Thank you!
