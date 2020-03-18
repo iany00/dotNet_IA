@@ -10,7 +10,7 @@ namespace ParkingLot.Models
     public class ParkingSpot
     {
         public int Floor { get; set; }
-        public int StartPosition { get; set; }
+        public ParkingSpotStatus status { get; set; }
         public int SpotCount { get; set; }
         public ParkingSpotTypes ParkingSpotTypes { get; set; }
 

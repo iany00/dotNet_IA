@@ -18,17 +18,17 @@ namespace ParkingLot.Models
             {
                 case VehicleTypes.MotorCycle:
                     return new ParkingRequirement() { 
-                        ParkingSpot = ParkingSpotTypes.Motorcycle, ParkingSpotsCount = 1 
+                        ParkingSpotType = ParkingSpotTypes.Motorcycle, ParkingSpotsCount = 1 
                     };
                 
                 case VehicleTypes.Car:
                     return new ParkingRequirement() { 
-                        ParkingSpot = ParkingSpotTypes.Compact, ParkingSpotsCount = 1 
+                        ParkingSpotType = ParkingSpotTypes.Compact, ParkingSpotsCount = 1 
                     };
                 
                 case VehicleTypes.Bus:
                     return new ParkingRequirement() {
-                        ParkingSpot = ParkingSpotTypes.Large, ParkingSpotsCount = 4 
+                        ParkingSpotType = ParkingSpotTypes.Large, ParkingSpotsCount = 4 
                     };
                 
                 default:

@@ -16,8 +16,8 @@ namespace ParkingLot.Interfaces
         // un-park vehicle
         bool UnParkvehicle(Vehicle vehicle);
 
-        // Get parking spot for this vehicle type
-        ParkingSpot GetOptimalParkingSpot(Vehicle vehicle);
+        // Get parking spot for this vehicle type; vehicle may be parked on multiple spots
+        List<ParkingSpot> GetOptimalParkingSpot(Vehicle vehicle);
 
         // Check  parking spot status
         ParkingSpotStatus GetParkingSpotStatus(ParkingSpot spot);

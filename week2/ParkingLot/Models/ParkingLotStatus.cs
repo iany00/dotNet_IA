@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ParkingLot.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,14 +12,17 @@ namespace ParkingLot.Models
         public List<ParkingSpot> FreeSpots { get; set; }
         public Dictionary<string, ParkingSpot> OccupiedSpot { get; set; }
 
-        public ParkingSpot GetFreeSpot()
-        {
-            return this.FreeSpots.First();
-        }
-
         internal void AddFreeSpot(ParkingSpot spot)
         {
+            spot.status = ParkingSpotStatus.Vacant;
             this.FreeSpots.Add(spot);
+        }
+
+        internal void OccupySpot(string vehicleNumber, ParkingSpot spot)
+        {
+            spot.status = ParkingSpotStatus.Occupied;
+            this.FreeSpots.Remove(spot);
+            this.OccupiedSpot.Add(vehicleNumber, spot);
         }
     }
 

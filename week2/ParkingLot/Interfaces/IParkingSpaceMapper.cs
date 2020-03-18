@@ -9,7 +9,7 @@ namespace ParkingLot.Interfaces
 {
     public interface IParkingSpaceMapper
     {
-        // Get the best parking spot for vehicle
+        // Get the smallest number of spaces for vehicle
         ParkingRequirement GetSmallestParkingSpaceRequired(Vehicle vehicle);
     }
 }

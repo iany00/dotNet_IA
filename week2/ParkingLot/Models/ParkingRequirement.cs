@@ -9,7 +9,7 @@ namespace ParkingLot.Models
 {
     public class ParkingRequirement
     {
-        public ParkingSpotTypes ParkingSpot { get; set; }
+        public ParkingSpotTypes ParkingSpotType { get; set; }
         public int ParkingSpotsCount { get; set; }
     }
 }
