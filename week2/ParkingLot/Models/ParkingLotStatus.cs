@@ -24,6 +24,19 @@ namespace ParkingLot.Models
             this.FreeSpots.Remove(spot);
             this.OccupiedSpot.Add(vehicleNumber, spot);
         }
+
+        internal void RemoveOccupiedSpot(ParkingSpot spot)
+        {
+            foreach (var oSpot in this.OccupiedSpot)
+            {
+                if (oSpot.Value == spot)
+                {
+                    this.OccupiedSpot.Remove(oSpot.Key);
+                    this.AddFreeSpot(spot);
+                    break;
+                }
+            }
+        }
     }
 
 }

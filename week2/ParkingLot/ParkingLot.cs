@@ -14,6 +14,7 @@ namespace ParkingLot
         protected ParkingLotStatus parkingLotStatus;
 
       
+        // Construct
         public ParkingLot(Dictionary<int, ParkingLevel> parkingLot)
         {
             this.parkingLot = parkingLot;
@@ -22,12 +23,14 @@ namespace ParkingLot
             {
                 foreach (ParkingSpot spot in level.Value)
                 {
-                    parkingLotStatus.AddFreeSpot(spot);
+                   parkingLotStatus.AddFreeSpot(spot);
                 }
             }
         }
 
-        // Park vehicle
+        /*
+         * Park vehicle
+         */
         public bool ParkVehicle(Vehicle vehicle)
         {
             // Check if is already parked
@@ -55,14 +58,28 @@ namespace ParkingLot
             return true;
         }
 
+        /*
+         * Un-Park Vehicle
+         */
         public bool UnParkvehicle(Vehicle vehicle)
         {
-            throw new NotImplementedException();
+            if (this.parkingLotStatus.OccupiedSpot.ContainsKey(vehicle.VehicleNumber) == false)
+            {
+                throw new InvalidOperationException($"Vehicle with number {vehicle.VehicleNumber} is not parked");
+            }
+
+            // Get vehicle spot
+            ParkingSpot spot = this.parkingLotStatus.OccupiedSpot[vehicle.VehicleNumber];
+
+            // Remove occupied spot
+            this.parkingLotStatus.RemoveOccupiedSpot(spot);
+
+            return true;
         }
 
 
         /**
-         * 
+         * Get optima parking spot
          */
         public List<ParkingSpot> GetOptimalParkingSpot(Vehicle vehicle)
         {

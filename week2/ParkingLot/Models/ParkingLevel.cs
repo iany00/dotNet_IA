@@ -8,7 +8,7 @@ namespace ParkingLot.Models
     class ParkingLevel : IEnumerable
     {
         public IEnumerable<List<ParkingSpot>> parkingLevel;
-        protected int numberOfLevels;
+        protected int levelNumber;
 
         public IEnumerator<ParkingSpot> GetEnumerator()
         {
