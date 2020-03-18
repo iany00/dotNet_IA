@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ParkingLot.Models
+namespace ParkingLot
 {
     public class ParkingSpaceMapper : IParkingSpaceMapper
     {

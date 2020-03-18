@@ -1,10 +1,11 @@
 ﻿using ParkingLot.Enums;
 using ParkingLot.Interfaces;
+using ParkingLot.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ParkingLot.Models
+namespace ParkingLot
 {
     class ParkingLot : IParkingLot
     {
