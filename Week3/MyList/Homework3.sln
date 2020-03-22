@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29905.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyList", "MyList.csproj", "{43B89189-1E8D-423C-9A76-EF845D642AE2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Timer", "..\Timer\Timer.csproj", "{75FF379B-064E-4B37-B0A3-C1B600EA84ED}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IEnumerable extensions", "..\IEnumerable extensions\IEnumerable extensions.csproj", "{C6C02C04-3996-4919-BE17-9CB608E0E2E7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Range Exception", "..\Range Exception\Range Exception.csproj", "{F3414626-4299-448D-9562-2BBDAC5DBC3D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReadNumber", "..\ReadNumber\ReadNumber.csproj", "{AE90A01A-DB9F-44CF-924A-870AF93926E8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BitArray64", "..\BitArray64\BitArray64.csproj", "{492F4496-43FC-48CF-959F-ECEF1556EF49}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{43B89189-1E8D-423C-9A76-EF845D642AE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43B89189-1E8D-423C-9A76-EF845D642AE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43B89189-1E8D-423C-9A76-EF845D642AE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43B89189-1E8D-423C-9A76-EF845D642AE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75FF379B-064E-4B37-B0A3-C1B600EA84ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75FF379B-064E-4B37-B0A3-C1B600EA84ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75FF379B-064E-4B37-B0A3-C1B600EA84ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75FF379B-064E-4B37-B0A3-C1B600EA84ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6C02C04-3996-4919-BE17-9CB608E0E2E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6C02C04-3996-4919-BE17-9CB608E0E2E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6C02C04-3996-4919-BE17-9CB608E0E2E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6C02C04-3996-4919-BE17-9CB608E0E2E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3414626-4299-448D-9562-2BBDAC5DBC3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3414626-4299-448D-9562-2BBDAC5DBC3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3414626-4299-448D-9562-2BBDAC5DBC3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3414626-4299-448D-9562-2BBDAC5DBC3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE90A01A-DB9F-44CF-924A-870AF93926E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE90A01A-DB9F-44CF-924A-870AF93926E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE90A01A-DB9F-44CF-924A-870AF93926E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE90A01A-DB9F-44CF-924A-870AF93926E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{492F4496-43FC-48CF-959F-ECEF1556EF49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{492F4496-43FC-48CF-959F-ECEF1556EF49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{492F4496-43FC-48CF-959F-ECEF1556EF49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{492F4496-43FC-48CF-959F-ECEF1556EF49}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A8BCBDA7-8B72-4AC7-AFFE-5214957C94F7}
+	EndGlobalSection
+EndGlobal
