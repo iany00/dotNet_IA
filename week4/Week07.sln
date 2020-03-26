@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.28803.452
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqAndLamdaExpressions", "LinqAndLamdaExpressions\LinqAndLamdaExpressions.csproj", "{5BAA95C6-5D34-446E-AB54-11F7A97E60C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Structs", "Structs\Structs.csproj", "{2131BCEC-6A17-4579-A991-D8252BAA8229}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clock", "Clock\Clock.csproj", "{B7FD6630-E0C3-4D85-A323-00EDCC54E0D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{5BAA95C6-5D34-446E-AB54-11F7A97E60C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BAA95C6-5D34-446E-AB54-11F7A97E60C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BAA95C6-5D34-446E-AB54-11F7A97E60C3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2131BCEC-6A17-4579-A991-D8252BAA8229}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2131BCEC-6A17-4579-A991-D8252BAA8229}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2131BCEC-6A17-4579-A991-D8252BAA8229}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2131BCEC-6A17-4579-A991-D8252BAA8229}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7FD6630-E0C3-4D85-A323-00EDCC54E0D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7FD6630-E0C3-4D85-A323-00EDCC54E0D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7FD6630-E0C3-4D85-A323-00EDCC54E0D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7FD6630-E0C3-4D85-A323-00EDCC54E0D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
