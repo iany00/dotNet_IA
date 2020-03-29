@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Clock", "Clock\Clock.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "String", "String\String.csproj", "{87C5F2DA-DDD6-4776-A4C4-860AA2BC776F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilePrint", "FilePrint\FilePrint.csproj", "{4839C72E-8AFE-42D1-82D4-BC4D179A06D3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{87C5F2DA-DDD6-4776-A4C4-860AA2BC776F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87C5F2DA-DDD6-4776-A4C4-860AA2BC776F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87C5F2DA-DDD6-4776-A4C4-860AA2BC776F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4839C72E-8AFE-42D1-82D4-BC4D179A06D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4839C72E-8AFE-42D1-82D4-BC4D179A06D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4839C72E-8AFE-42D1-82D4-BC4D179A06D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4839C72E-8AFE-42D1-82D4-BC4D179A06D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
