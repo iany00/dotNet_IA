@@ -10,6 +10,9 @@ namespace Clock
 {
     public struct BusinessDate : IFormattable, IEquatable<BusinessDate>, IComparable<BusinessDate>, IXmlSerializable
     {
+        private DateTime _date;
+        private bool _emptyIsMax;
+
         public int CompareTo([AllowNull] BusinessDate other)
         {
             throw new NotImplementedException();
@@ -22,7 +25,7 @@ namespace Clock
 
         public XmlSchema GetSchema()
         {
-            throw new NotImplementedException();
+            return null;
         }
 
         public void ReadXml(XmlReader reader)
