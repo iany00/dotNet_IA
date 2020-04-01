@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace SmoothSentences
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -21,7 +21,7 @@ namespace SmoothSentences
 
         }
 
-        private static bool IsSmooth(string smooth)
+        public static bool IsSmooth(string smooth)
         {
             List<string> words = new List<string>();
 
