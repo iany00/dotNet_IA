@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FilePrint", "FilePrint\File
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmoothSentences", "SmoothSentences\SmoothSentences.csproj", "{A5ACA5F1-E251-4D6E-8B71-08EA88508866}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSmoothSenteces", "TestSmoothSenteces\TestSmoothSenteces.csproj", "{1057EF6B-D9E6-4407-93EC-BDF075469D61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestSmoothSenteces", "TestSmoothSenteces\TestSmoothSenteces.csproj", "{1057EF6B-D9E6-4407-93EC-BDF075469D61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestClock", "TestClock\TestClock.csproj", "{90C44768-F4A8-4801-B498-AE409FCE24DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{1057EF6B-D9E6-4407-93EC-BDF075469D61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1057EF6B-D9E6-4407-93EC-BDF075469D61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1057EF6B-D9E6-4407-93EC-BDF075469D61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90C44768-F4A8-4801-B498-AE409FCE24DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90C44768-F4A8-4801-B498-AE409FCE24DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90C44768-F4A8-4801-B498-AE409FCE24DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90C44768-F4A8-4801-B498-AE409FCE24DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -6,7 +6,15 @@ namespace Clock
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello");
+            BusinessDate today = BusinessDate.Today;
+            BusinessDate testDay = BusinessDate.Parse("2020-07-04");
+
+            var stringDate = testDay.ToString();     // "2020-07-04"
+            int july       = testDay.Month;  // 7
+
+            Console.WriteLine(stringDate);
+            Console.WriteLine(july);
+            Console.WriteLine(today);
         }
     }
 }
