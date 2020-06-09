@@ -4,7 +4,12 @@ using System.Text;
 
 namespace CoffeShop
 {
-    class MilkDecorator
+    internal class MilkDecorator : CondimentDecorator
     {
+        public MilkDecorator(ICoffee coffee) : base(coffee)
+        {
+            _name = "Milk";
+            _price = 1;
+        }
     }
 }

@@ -4,7 +4,16 @@ using System.Text;
 
 namespace CoffeShop
 {
-    class Expresso
+    class Espresso : ICoffee
     {
+        public string Description()
+        {
+            throw new NotImplementedException();
+        }
+
+        public double Price()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

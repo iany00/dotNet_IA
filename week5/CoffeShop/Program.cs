@@ -6,7 +6,8 @@ namespace CoffeShop
     {
         static void Main(string[] args)
         {
-           var coffee = new ChocolateDecorator(new Espresso());
+            var coffee = new ChocolateDecorator(new Espresso());
+            //...
         }
     }
 }

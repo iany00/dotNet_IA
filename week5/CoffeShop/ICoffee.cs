@@ -4,7 +4,10 @@ using System.Text;
 
 namespace CoffeShop
 {
-    interface Coffee
+    public interface ICoffee
     {
+        double Price();
+
+        string Description();
     }
 }
