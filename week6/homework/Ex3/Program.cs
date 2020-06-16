@@ -19,7 +19,7 @@ namespace Ex3
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Watcher watcher = new Watcher();   
         }
     }
 }
