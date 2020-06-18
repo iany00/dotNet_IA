@@ -21,8 +21,12 @@ namespace Ex2___REST_API
 
         static readonly HttpClient client = new HttpClient();
 
+        private static readonly SemaphoreSlim Sem = new SemaphoreSlim(4); // Capacity of 4
+
         public static async Task<List<Comment>> GetCommentByPostId(int id)
         {
+            Sem.Wait();
+
             var uri = $"https://jsonplaceholder.typicode.com/comments?postId={id}";
 
             HttpResponseMessage response = await client.GetAsync(uri);
@@ -33,6 +37,8 @@ namespace Ex2___REST_API
             Console.WriteLine("Task={0}, id={1}, TickCount={2}, Thread={3}", Task.CurrentId, id, tickCount, Thread.CurrentThread.ManagedThreadId);
 
             var deserialized = JsonConvert.DeserializeObject<List<Comment>>(responseBody);
+
+            Sem.Release();
 
             return deserialized;
         }
