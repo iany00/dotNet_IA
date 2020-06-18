@@ -25,7 +25,6 @@ namespace Ex4
             wordGroup.Add("s", new List<string>());  // s(5 - 10 chars)
             wordGroup.Add("m", new List<string>());  // m(10 - 15 chars)
             wordGroup.Add("l", new List<string>());  // l(larger than 15)
-
         }
 
         private static readonly object padlock = new object();
@@ -54,10 +53,19 @@ namespace Ex4
          */
         public void ReadAllFiles()
         {
-            Parallel.ForEach(fileNames, (currentFile) =>
+            var tasks = new List<Task>();
+            foreach (var file in fileNames)
             {
-                ReadFile(currentFile);
-            });
+                tasks.Add(Task.Factory.StartNew(() => { ReadFile(file); }));
+                
+            }
+            Task.WaitAll(tasks.ToArray());
+
+            //TPL
+            /* Parallel.ForEach(fileNames, (currentFile) =>
+             {
+                 ReadFile(currentFile);
+             });*/
         }
 
         /*
