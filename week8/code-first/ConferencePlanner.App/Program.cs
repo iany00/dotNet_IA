@@ -146,7 +146,7 @@
             // create a separate project for dapper
             // implement the ISpeakerRepository using dapper
 
-            //---Done
+            //-- Done Ex8Dapper
         }
     }
 
@@ -162,9 +162,10 @@
                join SessionSpeaker ss on ses.Id = ss.SessionId
                join Speakers sp on sp.Id = ss.SpeakerId
             */
-
             // use the view from Dapper
             // display all information at console
+
+            //-- Done Ex8Dapper
         }
     }
 

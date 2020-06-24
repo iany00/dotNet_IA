@@ -12,25 +12,32 @@ namespace Ex8Dapper
     {
         private string sqlConnectionString = @"data source =.\SQLExpress; database = ConferencePlanner; integrated security = SSPI";
 
-        public List<Speaker> SpeakersExecute()
+        public List<Speaker> SpeakersExecuteDemo()
         {
-            List<Speaker> speakers = new List<Speaker>();
-
-            string sqlOrder = "SELECT * FROM Speaker WHERE Id = @Id;";
+            string sqlOrder = "SELECT * FROM Speakers WHERE Id = @SpeakerId;";
             string sqlOrderInsert = "INSERT INTO Speakers (Bio, WebSite, FullName) Values (@Bio, @WebSite, @FullName);";
 
             using (var connection = new SqlConnection(sqlConnectionString))
             {
-                var speakersDetail = connection.QueryFirstOrDefault<Speaker>(sqlOrder, new { Id = 1 });
+                var speakersDetail = connection.QueryFirstOrDefault(sqlOrder, new { SpeakerId = 1 });
 
                 var affectedRows = connection.Execute(sqlOrderInsert, new Speaker { Bio = "My Bio", WebSite = "www.mywebsite.com", FullName = "JOhn DOe"});
-                
-                Console.WriteLine(affectedRows);
 
                 var listOfSpeakers = connection.Query<Speaker>("select * from Speakers").ToList();
 
                 return listOfSpeakers;
             }            
+        }
+
+        public List<AllSessionsAndSpeakersView> useViewFromDapper()
+        {
+            using (var connection = new SqlConnection(sqlConnectionString))
+            {
+                var sessonAndSpeakers = new AllSessionsAndSpeakersView();
+                List<AllSessionsAndSpeakersView> data = connection.Query<AllSessionsAndSpeakersView>("select * from AllSessionsAndSpeakersView ", new { sessonAndSpeakers }).AsList();
+
+                return data;
+            }
         }
 
     }
