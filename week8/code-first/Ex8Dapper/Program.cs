@@ -7,7 +7,7 @@ namespace Ex8Dapper
         static void Main(string[] args)
         {
             var repo = new SpeakerRepository();
-            var speakers = repo.GetAllSpeakers();
+            var speakers = repo.SpeakersExecute();
         }
     }
 }

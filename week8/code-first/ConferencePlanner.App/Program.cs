@@ -1,10 +1,10 @@
 ﻿namespace ConferencePlanner.App
 {
-    using System;
-    using System.Linq;
     using ConferencePlanner.Data.Entities;
     using Data;
     using Microsoft.EntityFrameworkCore;
+    using System;
+    using System.Linq;
 
     internal class Program
     {
@@ -47,6 +47,8 @@
             // Todo
             // on Tracks table, add PHP, C# tracks with a seed
             // update ApplicationDbContext to run a seed
+
+            // Tracks added on OnModelCreating in ApplicatioDbContext
         }
     }
 
@@ -113,14 +115,14 @@
             // number of sessions for each speaker using direct context
             var session = context.SessionSpeaker
                 .GroupBy(x => x.SpeakerId)
-                .Select(x => new { 
-                    Id = x.Key, 
-                    Count = x.Count() 
+                .Select(x => new
+                {
+                    Id = x.Key,
+                    Count = x.Count()
                 })
                 .ToList();
 
             // number of tracks per session
-
             // all tracks for each session
         }
     }
@@ -129,8 +131,9 @@
     {
         public static void Run(ApplicationDbContext context)
         {
-            // todo
             // get all sessions for one speaker
+            // Lazy loading
+            var speakers = context.Speakers.Include(c => c.SessionSpeakers).ToList();
 
         }
     }
@@ -142,6 +145,8 @@
             // todo
             // create a separate project for dapper
             // implement the ISpeakerRepository using dapper
+
+            //---Done
         }
     }
 
