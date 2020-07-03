@@ -2,5 +2,7 @@
 {
     public enum Role
     {
+        Employee = 1,
+        Customer = 2
     }
 }
