@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace CarStore.Models
+namespace CarStore.Domain.Models
 {
     public class CarManufacturer
     {

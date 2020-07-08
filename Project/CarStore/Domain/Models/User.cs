@@ -1,11 +1,8 @@
-﻿using CarStore.Models;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+using CarStore.Domain.Enums;
 
-namespace CarStore.Data.Entities
+namespace CarStore.Domain.Models
 {
     public class User
     {
@@ -13,7 +10,7 @@ namespace CarStore.Data.Entities
         [Required]
         public string Name { get; set; }
         [Required]
-        public Role Role { get; set; }
+        public ERole Role { get; set; }
         public ICollection<Car> Cars { get; set; }
     }
 }

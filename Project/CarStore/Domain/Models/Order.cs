@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace CarStore.Data.Entities
+﻿namespace CarStore.Domain.Models
 {
     public class Order
     {

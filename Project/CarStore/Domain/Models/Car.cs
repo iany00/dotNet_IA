@@ -1,11 +1,11 @@
-﻿using CarStore.Data.Enums;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using CarStore.Data.Entities;
+using CarStore.Domain.Enums;
 
-namespace CarStore.Models
+namespace CarStore.Domain.Models
 {
     public class Car
     {
@@ -13,15 +13,17 @@ namespace CarStore.Models
         public string Model { get; set; }
         public int Year { get; set; }
         public decimal Price { get; set; }
+        public ECurrency Currency { get; set; }
         public string Description { get; set; }
-        public EngineType EngineType { get; set; }
-        public FuelType FuelType { get; set; }
-        public SeatsAmountType SeatsAmount { get; set; }
-        public TransmissionType TransmissionType { get; set; }
+        public EEngineType EngineType { get; set; }
+        public EFuelType FuelType { get; set; }
+        public ESeatsAmountType SeatsAmount { get; set; }
+        public ETransmissionType TransmissionType { get; set; }
         public string CarHolderId { get; set; }
         public User CarHolder { get; set; }
         public int CarManufacturerId { get; set; }
         public CarManufacturer CarManufacturer { get; set; }
+        public IList<CarPhotos> CarPhotos { get; set; }
     }
 
 }

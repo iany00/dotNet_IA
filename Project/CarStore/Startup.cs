@@ -2,7 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CarStore.Data;
+using CarStore.Domain.DataAccess.Contexts;
+using CarStore.Domain.DataAccess.Repositories;
+using CarStore.Domain.Repositories;
+using CarStore.Domain.Services;
 using CarStore.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -39,6 +42,8 @@ namespace CarStore
             });
 
             services.AddScoped<INotificationService, NotificationService>();
+            //services.AddScoped<ICarService, CarService>();
+            //services.AddScoped<ICarRepository, CarRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,6 +52,10 @@ namespace CarStore
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
+                app.UseSwagger();
+
+                app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Car Store API V1"); });
             }
 
             app.UseRouting();

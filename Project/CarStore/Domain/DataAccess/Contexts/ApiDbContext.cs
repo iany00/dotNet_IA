@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CarStore.Data.Entities;
-using CarStore.Models;
+﻿using CarStore.Domain.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace CarStore.Data
+namespace CarStore.Domain.DataAccess.Contexts
 {
     public class ApiDbContext : DbContext
     {
@@ -22,6 +16,9 @@ namespace CarStore.Data
         public DbSet<Order> Orders { get; set; }
 
         public DbSet<Store> Stores { get; set; }
+        public DbSet<CarPhotos> CarPhotos { get; set; }
+
+        // TODO: do we need to set foreingkeys?
     }
 
    

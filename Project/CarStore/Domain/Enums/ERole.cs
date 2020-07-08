@@ -1,6 +1,6 @@
-﻿namespace CarStore.Data.Entities
+﻿namespace CarStore.Domain.Enums
 {
-    public enum Role
+    public enum ERole
     {
         Employee = 1,
         Customer = 2
