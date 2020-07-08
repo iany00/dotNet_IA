@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using CarStore.Domain.Enums;
+using CarStore.Domain.Models;
 
-namespace CarStore.Domain.Models
+namespace CarStore.Resource
 {
-    public class Car
+    public class CarResource
     {
         public int Id { get; set; }
         public string Model { get; set; }
@@ -20,10 +20,6 @@ namespace CarStore.Domain.Models
         public ESeatsAmountType SeatsAmount { get; set; }
         public ETransmissionType TransmissionType { get; set; }
         public int CarHolderId { get; set; }
-        public User CarHolder { get; set; }
         public int CarManufacturerId { get; set; }
-        public CarManufacturer CarManufacturer { get; set; }
-        public IList<CarPhotos> CarPhotos { get; set; }
     }
-
 }

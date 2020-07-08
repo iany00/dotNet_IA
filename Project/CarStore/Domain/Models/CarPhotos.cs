@@ -9,7 +9,6 @@ namespace CarStore.Domain.Models
         public string Name { get; set; }
         public DateTimeOffset UploadDate { get; set; } = DateTimeOffset.Now;
         public long FileSize { get; set; }
-
         public int CarId { get; set; }
     }
 }

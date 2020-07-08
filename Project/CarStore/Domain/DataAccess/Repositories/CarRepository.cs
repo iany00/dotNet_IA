@@ -19,5 +19,10 @@ namespace CarStore.Domain.DataAccess.Repositories
         {
             return await _context.Cars.ToListAsync();
         }
+
+        public async Task AddAsync(Car car)
+        {
+            await _context.Cars.AddAsync(car);
+        }
     }
 }

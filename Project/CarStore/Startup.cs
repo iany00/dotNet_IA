@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using CarStore.Domain.DataAccess.Contexts;
 using CarStore.Domain.DataAccess.Repositories;
 using CarStore.Domain.Repositories;
@@ -42,8 +43,11 @@ namespace CarStore
             });
 
             services.AddScoped<INotificationService, NotificationService>();
-            //services.AddScoped<ICarService, CarService>();
-            //services.AddScoped<ICarRepository, CarRepository>();
+            services.AddScoped<ICarService, CarService>();
+            services.AddScoped<ICarRepository, CarRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            services.AddAutoMapper(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
