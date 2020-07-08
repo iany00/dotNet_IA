@@ -49,9 +49,9 @@ namespace CarStore.Controllers
                 return BadRequest(result.Message);
             }
 
-            var categoryResource = _mapper.Map<Car, CarResource>(result.Car);
+            var carResource = _mapper.Map<Car, CarResource>(result.Car);
 
-            return Ok(categoryResource);
+            return Ok(carResource);
         }
 
     }
