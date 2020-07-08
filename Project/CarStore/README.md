@@ -4,7 +4,7 @@
 
 Web Api, that allows users to buy, sell cars!
 
-Concept I used:
+Concepts I used:
 - Swagger
 - Dependency injection mechanism
 - Repository Pattern
