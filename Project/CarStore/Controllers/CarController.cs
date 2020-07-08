@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
-using CarStore.Domain.Services;
+using CarStore.API.Extensions;
+using CarStore.API.Resource;
 using CarStore.Domain.Models;
-using CarStore.Extensions;
-using CarStore.Resource;
+using CarStore.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CarStore.Controllers
+namespace CarStore.API.Controllers
 {
     [Route("api/[controller]")]
     public class CarController : Controller

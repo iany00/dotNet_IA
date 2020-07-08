@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CarStore.Domain.Enums;
-using CarStore.Domain.Models;
+﻿using CarStore.Domain.Enums;
 
-namespace CarStore.Resource
+namespace CarStore.API.Resource
 {
     public class CarResource
     {

@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using CarStore.Domain.Models;
 using CarStore.Domain.Repositories;
 using CarStore.Domain.Services;
 using CarStore.Domain.Services.Communication;
 
-namespace CarStore.Services
+namespace CarStore.API.Services
 {
     public class CarService : ICarService
     {

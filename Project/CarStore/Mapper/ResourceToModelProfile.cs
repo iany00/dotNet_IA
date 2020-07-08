@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
+using CarStore.API.Resource;
 using CarStore.Domain.Models;
-using CarStore.Resource;
 
-namespace CarStore.Mapper
+namespace CarStore.API.Mapper
 {
     public class ResourceToModelProfile : Profile
     {
