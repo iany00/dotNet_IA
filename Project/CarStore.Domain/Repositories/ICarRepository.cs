@@ -10,5 +10,10 @@ namespace CarStore.Domain.Repositories
     {
         Task<IEnumerable<Car>> ListAsyncTask();
         Task AddAsync(Car car);
+        Task<Car> FindByIdAsync(int id);
+
+        void Update(Car car);
+
+        void Remove(Car car);
     }
 }

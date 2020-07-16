@@ -18,7 +18,7 @@ namespace CarStore.Domain.DataAccess.Contexts
         public DbSet<Store> Stores { get; set; }
         public DbSet<CarPhotos> CarPhotos { get; set; }
 
-        // TODO: do we need to set foreingkeys?
+
     }
 
    

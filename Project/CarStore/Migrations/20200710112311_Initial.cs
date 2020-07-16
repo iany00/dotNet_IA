@@ -91,8 +91,7 @@ namespace CarStore.API.Migrations
                     FuelType = table.Column<int>(nullable: false),
                     SeatsAmount = table.Column<int>(nullable: false),
                     TransmissionType = table.Column<int>(nullable: false),
-                    CarHolderId = table.Column<string>(nullable: true),
-                    CarHolderId1 = table.Column<int>(nullable: true),
+                    CarHolderId = table.Column<int>(nullable: false),
                     CarManufacturerId = table.Column<int>(nullable: false),
                     StoreId = table.Column<int>(nullable: true)
                 },
@@ -100,11 +99,11 @@ namespace CarStore.API.Migrations
                 {
                     table.PrimaryKey("PK_Cars", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Cars_Users_CarHolderId1",
-                        column: x => x.CarHolderId1,
+                        name: "FK_Cars_Users_CarHolderId",
+                        column: x => x.CarHolderId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Cars_CarManufacturers_CarManufacturerId",
                         column: x => x.CarManufacturerId,
@@ -148,9 +147,9 @@ namespace CarStore.API.Migrations
                 column: "CarId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cars_CarHolderId1",
+                name: "IX_Cars_CarHolderId",
                 table: "Cars",
-                column: "CarHolderId1");
+                column: "CarHolderId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cars_CarManufacturerId",

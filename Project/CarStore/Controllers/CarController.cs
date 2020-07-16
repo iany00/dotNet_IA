@@ -38,9 +38,9 @@ namespace CarStore.API.Controllers
                 return BadRequest(ModelState.GetErrorMessages());
             }
 
-            var category = _mapper.Map<SaveCarResource, Car>(resource);
+            var carModel = _mapper.Map<SaveCarResource, Car>(resource);
 
-            var result = await _carService.SaveAsync(category);
+            var result = await _carService.SaveAsync(carModel);
 
             if (!result.Success)
             {
@@ -50,6 +50,41 @@ namespace CarStore.API.Controllers
             var carResource = _mapper.Map<Car, CarResource>(result.Car);
 
             return Ok(carResource);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutAsync(int id, [FromBody] SaveCarResource resource)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState.GetErrorMessages());
+            }
+
+            var carModel = _mapper.Map<SaveCarResource, Car>(resource);
+
+            var result = await _carService.UpdateAsync(id, carModel);
+
+            if (!result.Success)
+            {
+                return BadRequest(result.Message);
+            }
+
+            var carResource = _mapper.Map<Car, CarResource>(result.Car);
+
+            return Ok(carResource);
+
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAsync(int id)
+        {
+            var result = await _carService.DeleteAsync(id);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            var categoryResource = _mapper.Map<Car, CarResource>(result.Car);
+            return Ok(categoryResource);
         }
 
     }

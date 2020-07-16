@@ -27,7 +27,7 @@ namespace CarStore.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApiDbContext>(options =>
-                options.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("CarStore.API")));
 
             services.AddControllers();
 
@@ -38,7 +38,9 @@ namespace CarStore.API
 
             services.AddScoped<INotificationService, NotificationService>();
             services.AddScoped<ICarService, CarService>();
+
             services.AddScoped<ICarRepository, CarRepository>();
+
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddAutoMapper(typeof(Startup));

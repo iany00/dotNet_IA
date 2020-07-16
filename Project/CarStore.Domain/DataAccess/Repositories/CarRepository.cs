@@ -24,5 +24,20 @@ namespace CarStore.Domain.DataAccess.Repositories
         {
             await _context.Cars.AddAsync(car);
         }
+
+        public async Task<Car> FindByIdAsync(int id)
+        {
+            return await _context.Cars.FindAsync(id);
+        }
+
+        public void Update(Car car)
+        {
+            _context.Cars.Update(car);
+        }
+
+        public void Remove(Car car)
+        {
+            _context.Cars.Remove(car);
+        }
     }
 }

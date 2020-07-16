@@ -11,3 +11,4 @@ Concepts I used:
 - Resources classes
 - AutoMapper library
 - Unit Of Work pattern
+- Extensions

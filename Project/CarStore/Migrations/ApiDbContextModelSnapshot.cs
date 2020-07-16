@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace CarStore.Migrations
+namespace CarStore.API.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
     partial class ApiDbContextModelSnapshot : ModelSnapshot
@@ -26,10 +26,7 @@ namespace CarStore.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CarHolderId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("CarHolderId1")
+                    b.Property<int>("CarHolderId")
                         .HasColumnType("int");
 
                     b.Property<int>("CarManufacturerId")
@@ -67,7 +64,7 @@ namespace CarStore.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CarHolderId1");
+                    b.HasIndex("CarHolderId");
 
                     b.HasIndex("CarManufacturerId");
 
@@ -191,7 +188,9 @@ namespace CarStore.Migrations
                 {
                     b.HasOne("CarStore.Domain.Models.User", "CarHolder")
                         .WithMany("Cars")
-                        .HasForeignKey("CarHolderId1");
+                        .HasForeignKey("CarHolderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("CarStore.Domain.Models.CarManufacturer", "CarManufacturer")
                         .WithMany("Cars")

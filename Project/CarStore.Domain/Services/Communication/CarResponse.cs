@@ -7,10 +7,10 @@ using CarStore.Domain.Models;
 
 namespace CarStore.Domain.Services.Communication
 {
-    public class SaveCarResponse : BaseResponse
+    public class CarResponse : BaseResponse
     {
         public Car Car { get; private set; }
-        public SaveCarResponse(bool success, string message, Car car) : base(success, message)
+        public CarResponse(bool success, string message, Car car) : base(success, message)
         {
             Car = car;
         }
@@ -18,9 +18,9 @@ namespace CarStore.Domain.Services.Communication
         /// <summary>
         /// Creates a success response.
         /// </summary>
-        /// <param name="Car">Saved Car.</param>
+        /// <param name="car">Saved Car.</param>
         /// <returns>Response.</returns>
-        public SaveCarResponse(Car car) : this(true, string.Empty, car)
+        public CarResponse(Car car) : this(true, string.Empty, car)
         { }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace CarStore.Domain.Services.Communication
         /// </summary>
         /// <param name="message">Error message.</param>
         /// <returns>Response.</returns>
-        public SaveCarResponse(string message) : this(false, message, null)
+        public CarResponse(string message) : this(false, message, null)
         { }
     }
 }
