@@ -12,3 +12,4 @@ Concepts I used:
 - AutoMapper library
 - Unit Of Work pattern
 - Extensions
+- Reflection

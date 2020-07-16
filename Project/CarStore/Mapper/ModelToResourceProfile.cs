@@ -32,6 +32,8 @@ namespace CarStore.API.Mapper
                     opt => opt.MapFrom(src => src.TransmissionType.ToDescriptionString()));
 
             CreateMap<CarManufacturer, CarManufacturerResource>();
+
+            CreateMap<Store, StoreResource>();
         }
     }
 }

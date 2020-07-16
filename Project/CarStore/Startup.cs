@@ -44,6 +44,9 @@ namespace CarStore.API
             services.AddScoped<ICarManufacturerService, CarManufacturerService>();
             services.AddScoped<ICarManufacturerRepository, CarManufacturerRepository>();
 
+            services.AddScoped<IStoreRepository, StoreRepository>();
+            services.AddScoped<IStoreService, StoreService>();
+
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddAutoMapper(typeof(Startup));
         }
