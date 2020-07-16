@@ -23,9 +23,9 @@ namespace CarStore.API.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<IEnumerable<Car>> ListAsyncTask()
+        public async Task<IEnumerable<Car>> ListAsync()
         {
-            return await _carRepository.ListAsyncTask();
+            return await _carRepository.ListAsync();
         }
 
         public async Task<CarResponse> SaveAsync(Car car)
@@ -40,7 +40,7 @@ namespace CarStore.API.Services
             catch (Exception ex)
             {
                 // Do some logging stuff
-                return new CarResponse($"An error occurred when saving the category: {ex.Message}");
+                return new CarResponse($"An error occurred when saving the car: {ex.Message}");
             }
         }
 

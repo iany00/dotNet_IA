@@ -37,12 +37,14 @@ namespace CarStore.API
             });
 
             services.AddScoped<INotificationService, NotificationService>();
-            services.AddScoped<ICarService, CarService>();
 
+            services.AddScoped<ICarService, CarService>();
             services.AddScoped<ICarRepository, CarRepository>();
 
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<ICarManufacturerService, CarManufacturerService>();
+            services.AddScoped<ICarManufacturerRepository, CarManufacturerRepository>();
 
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddAutoMapper(typeof(Startup));
         }
 

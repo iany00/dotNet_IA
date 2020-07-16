@@ -9,6 +9,7 @@ namespace CarStore.API.Mapper
         public ResourceToModelProfile()
         {
             CreateMap<SaveCarResource, Car>();
+            CreateMap<SaveCarManufacturerResource, CarManufacturer>();
         }
         
     }

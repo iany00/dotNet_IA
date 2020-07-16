@@ -21,10 +21,11 @@ namespace CarStore.API.Controllers
             _mapper = mapper;
         }
 
+
         [HttpGet]
         public async Task<IEnumerable<CarResource>> GetAllAsync()
         {
-            var cars = await _carService.ListAsyncTask();
+            var cars = await _carService.ListAsync();
             var resources = _mapper.Map<IEnumerable<Car>, IEnumerable<CarResource>>(cars);
 
             return resources;

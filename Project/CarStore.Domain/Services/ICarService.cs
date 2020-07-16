@@ -9,7 +9,7 @@ namespace CarStore.Domain.Services
 {
     public interface ICarService
     {
-        Task<IEnumerable<Car>> ListAsyncTask();
+        Task<IEnumerable<Car>> ListAsync();
         Task<CarResponse> SaveAsync(Car car);
 
         Task<CarResponse> UpdateAsync(int id, Car car);

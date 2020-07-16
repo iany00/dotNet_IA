@@ -15,7 +15,7 @@ namespace CarStore.Domain.DataAccess.Repositories
         {
         }
 
-        public async Task<IEnumerable<Car>> ListAsyncTask()
+        public async Task<IEnumerable<Car>> ListAsync()
         {
             return await _context.Cars.ToListAsync();
         }
