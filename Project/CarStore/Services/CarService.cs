@@ -14,8 +14,6 @@ namespace CarStore.API.Services
     {
         private readonly ICarRepository _carRepository;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
-
 
         public CarService(ICarRepository carRepository, IUnitOfWork unitOfWork)
         {

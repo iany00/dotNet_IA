@@ -12,6 +12,7 @@ namespace CarStore.API.Mapper
             CreateMap<SaveCarManufacturerResource, CarManufacturer>();
             CreateMap<SaveStoreResource, Store>();
             CreateMap<SaveUserResource, User>();
+            CreateMap<SaveOrderResource, Order>();
         }
         
     }
