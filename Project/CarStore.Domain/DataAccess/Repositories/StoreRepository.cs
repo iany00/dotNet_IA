@@ -20,24 +20,24 @@ namespace CarStore.Domain.DataAccess.Repositories
             return await _context.Stores.ToListAsync();
         }
 
-        public Task AddAsync(Store store)
+        public async Task AddAsync(Store store)
         {
-            throw new NotImplementedException();
+            await _context.Stores.AddAsync(store);
         }
 
-        public Task<Store> FindByIdAsync(int id)
+        public async Task<Store> FindByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Stores.FindAsync(id);
         }
 
         public void Update(Store store)
-        {
-            throw new NotImplementedException();
+        { 
+            _context.Stores.Update(store);
         }
 
         public void Remove(Store store)
         {
-            throw new NotImplementedException();
+            _context.Stores.Remove(store);
         }
     }
 }

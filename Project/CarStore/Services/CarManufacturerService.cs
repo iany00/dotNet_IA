@@ -79,7 +79,7 @@ namespace CarStore.API.Services
             }
             catch (Exception e)
             {
-               return new CarManufacturerResponse($"An error occured while updating car manufacturer {e.Message}");
+               return new CarManufacturerResponse($"An error occured while deleting car manufacturer {e.Message}");
             }
 
         }

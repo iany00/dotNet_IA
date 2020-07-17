@@ -34,6 +34,8 @@ namespace CarStore.API.Mapper
             CreateMap<CarManufacturer, CarManufacturerResource>();
 
             CreateMap<Store, StoreResource>();
+            
+            CreateMap<User, UserResource>();
         }
     }
 }

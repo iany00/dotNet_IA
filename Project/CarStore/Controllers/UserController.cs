@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 using AutoMapper;
 using CarStore.API.Extensions;
@@ -15,83 +14,85 @@ namespace CarStore.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class StoreController : ControllerBase
+    public class UserController : ControllerBase
     {
-        private readonly IStoreService _storeService;
+        private readonly IUserService _userService;
         private readonly IMapper _mapper;
 
-        public StoreController(IStoreService storeService, IMapper mapper)
+        public UserController(IUserService userService, IMapper mapper)
         {
-            _storeService = storeService;
+            _userService = userService;
             _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<IEnumerable<StoreResource>> GetAllAsync()
+        public async Task<IEnumerable<UserResource>> GetAllAsync()
         {
-            var stores = await _storeService.ListAsync();
-            var resource = _mapper.Map<IEnumerable<Store>, IEnumerable<StoreResource>>(stores);
+            var users = await _userService.ListAsync();
+
+            var resource = _mapper.Map<IEnumerable<User>, IEnumerable<UserResource>>(users);
 
             return resource;
         }
 
+
         [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody] SaveStoreResource resource)
+        public async Task<IActionResult> PostAsync([FromBody] SaveUserResource resource)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState.GetErrorMessages());
             }
 
-            var store = _mapper.Map<SaveStoreResource, Store>(resource);
+            var user = _mapper.Map<SaveUserResource, User>(resource);
 
-            var result = await _storeService.SaveAsync(store);
+            var result = await _userService.SaveAsync(user);
 
             if (!result.Success)
             {
                 return BadRequest(result.Message);
             }
 
-            var storeResource = _mapper.Map<Store, StoreResource>(result.Store);
+            var userResource = _mapper.Map<User, UserResource>(result.User);
 
-            return Ok(storeResource);
+            return Ok(userResource);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAsync(int id, [FromBody] SaveStoreResource resource)
+        public async Task<IActionResult> PutAsync(int id, [FromBody] SaveUserResource resource)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState.GetErrorMessages());
             }
 
-            var store = _mapper.Map<SaveStoreResource, Store>(resource);
+            var user = _mapper.Map<SaveUserResource, User>(resource);
 
-            var result = await _storeService.UpdateAsync(id, store);
+            var result = await _userService.UpdateAsync(id, user);
 
             if (!result.Success)
             {
                 return BadRequest(result.Message);
             }
 
-            var storeResource = _mapper.Map<Store, StoreResource>(result.Store);
+            var userResource = _mapper.Map<User, UserResource>(result.User);
 
-            return Ok(storeResource);
+            return Ok(userResource);
         }
-
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
-            var result = await _storeService.DeleteAsync(id);
-
+            var result = await _userService.DeleteAsync(id);
             if (!result.Success)
             {
                 return BadRequest(result.Message);
             }
 
-            var resourece = _mapper.Map<Store, StoreResource>(result.Store);
-            return Ok(resourece);
+            var userResource = _mapper.Map<User, UserResource>(result.User);
+
+            return Ok(userResource);
+
         }
     }
 }

@@ -98,8 +98,7 @@ namespace CarStore.API.Services
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                return new CarResponse($"An error occured when deleting the Car: {e.Message}");
             }
         }
     }

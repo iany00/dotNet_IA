@@ -25,19 +25,66 @@ namespace CarStore.API.Services
            return await _storeRepository.ListAsync();
         }
 
-        public Task<StoreResponse> SaveAsync(Store store)
+        public async Task<StoreResponse> SaveAsync(Store store)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _storeRepository.AddAsync(store);
+                await _unitOfWork.CompleteAsync();
+
+                return new StoreResponse(store);
+            }
+            catch (Exception e)
+            {
+                return new StoreResponse($"An error occurred when saving the store: {e.Message}");
+            }
         }
 
-        public Task<StoreResponse> UpdateAsync(int id, Store store)
+        public async Task<StoreResponse> UpdateAsync(int id, Store store)
         {
-            throw new NotImplementedException();
+            var existingStore = await _storeRepository.FindByIdAsync(id);
+
+            if (existingStore == null)
+            {
+                return new StoreResponse("Store Not Found!");
+            }
+
+            existingStore.Name = store.Name;
+            existingStore.Address = store.Address;
+
+            try
+            {
+                _storeRepository.Update(existingStore);
+                await _unitOfWork.CompleteAsync();
+
+                return new StoreResponse(store);
+            }
+            catch (Exception e)
+            {
+                return new StoreResponse($"An error occurred when saving the store: {e.Message}");
+            }
         }
 
-        public Task<StoreResponse> DeleteAsync(int id)
+        public async Task<StoreResponse> DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var existingStore = await _storeRepository.FindByIdAsync(id);
+
+            if (existingStore == null)
+            {
+                return new StoreResponse("Store Not Found!");
+            }
+
+            try
+            {
+                _storeRepository.Remove(existingStore);
+                await _unitOfWork.CompleteAsync();
+
+                return new StoreResponse(existingStore);
+            }
+            catch (Exception e)
+            {
+                return new StoreResponse($"An error occurred when deleting the store: {e.Message}");
+            }
         }
     }
 }
