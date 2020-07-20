@@ -13,3 +13,5 @@ Concepts I used:
 - Unit Of Work pattern
 - Extensions
 - Reflection
+![alt text](https://github.com/iany00/dotNet_IA/blob/master/Project/swagger.png?raw=true)
+
