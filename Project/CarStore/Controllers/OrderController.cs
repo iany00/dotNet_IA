@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 using AutoMapper;
 using CarStore.API.Extensions;
@@ -17,83 +16,82 @@ namespace CarStore.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class StoreController : ControllerBase
+    public class OrderController : ControllerBase
     {
-        private readonly IStoreService _storeService;
+        private readonly IOrderService _orderService;
         private readonly IMapper _mapper;
 
-        public StoreController(IStoreService storeService, IMapper mapper)
+        public OrderController(IOrderService orderService, IMapper mapper)
         {
-            _storeService = storeService;
+            _orderService = orderService;
             _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<IEnumerable<StoreResource>> GetAllAsync()
+        public async Task<IEnumerable<OrderResource>> GetAllAsync()
         {
-            var stores = await _storeService.ListAsync();
-            var resource = _mapper.Map<IEnumerable<Store>, IEnumerable<StoreResource>>(stores);
+            var resource = await _orderService.ListAsync();
 
-            return resource;
+            var orderResource = _mapper.Map<IEnumerable<Order>, IEnumerable<OrderResource>>(resource);
+
+            return orderResource;
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody] SaveStoreResource resource)
+        public async Task<IActionResult> PostAsync([FromBody] SaveOrderResource resource)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState.GetErrorMessages());
             }
 
-            var store = _mapper.Map<SaveStoreResource, Store>(resource);
+            var order = _mapper.Map<SaveOrderResource, Order>(resource);
 
-            var result = await _storeService.SaveAsync(store);
+            var result = await _orderService.SaveAsync(order);
 
             if (!result.Success)
             {
                 return BadRequest(result.Message);
             }
 
-            var storeResource = _mapper.Map<Store, StoreResource>(result.Store);
+            var orderResource = _mapper.Map<Order, OrderResource>(result.Order);
 
-            return Ok(storeResource);
+            return Ok(orderResource);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAsync(int id, [FromBody] SaveStoreResource resource)
+        public async Task<IActionResult> PutAsync(int id, [FromBody] SaveOrderResource resource)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState.GetErrorMessages());
             }
 
-            var store = _mapper.Map<SaveStoreResource, Store>(resource);
+            var order = _mapper.Map<SaveOrderResource, Order>(resource);
 
-            var result = await _storeService.UpdateAsync(id, store);
+            var result = await _orderService.UpdateAsync(id, order);
 
             if (!result.Success)
             {
                 return BadRequest(result.Message);
             }
 
-            var storeResource = _mapper.Map<Store, StoreResource>(result.Store);
+            var orderResource = _mapper.Map<Order, OrderResource>(result.Order);
 
-            return Ok(storeResource);
+            return Ok(orderResource);
         }
-
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
-            var result = await _storeService.DeleteAsync(id);
+            var result = await _orderService.DeleteAsync(id);
 
             if (!result.Success)
             {
                 return BadRequest(result.Message);
             }
 
-            var resourece = _mapper.Map<Store, StoreResource>(result.Store);
-            return Ok(resourece);
+            return Ok(result.Order);
         }
     }
 }

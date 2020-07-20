@@ -5,11 +5,13 @@ using CarStore.API.Extensions;
 using CarStore.API.Resource;
 using CarStore.Domain.Models;
 using CarStore.Domain.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarStore.API.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     public class CarController : Controller
     {
         private readonly ICarService _carService;
