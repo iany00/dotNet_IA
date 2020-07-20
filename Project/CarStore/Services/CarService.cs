@@ -21,6 +21,11 @@ namespace CarStore.API.Services
             _unitOfWork = unitOfWork;
         }
 
+        public async Task<Car> GetAsync(int id)
+        {
+            return await _carRepository.FindByIdAsync(id);
+        }
+
         public async Task<IEnumerable<Car>> ListAsync()
         {
             return await _carRepository.ListAsync();

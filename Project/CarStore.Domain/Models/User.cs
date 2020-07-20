@@ -14,5 +14,7 @@ namespace CarStore.Domain.Models
         [Required]
         public ERole Role { get; set; }
         public ICollection<Car> Cars { get; set; }
+        [Timestamp] 
+        public byte[] RowVersion { get; set; }
     }
 }

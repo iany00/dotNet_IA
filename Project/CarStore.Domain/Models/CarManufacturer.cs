@@ -10,5 +10,8 @@ namespace CarStore.Domain.Models
         public string Name { get; set; }
 
         public ICollection<Car> Cars { get; set; }
+
+        [Timestamp] 
+        public byte[] RowVersion { get; set; }
     }
 }

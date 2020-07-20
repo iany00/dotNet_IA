@@ -32,6 +32,8 @@ namespace CarStore.Domain.DataAccess.Repositories
 
         public void Update(Car car)
         {
+            _context.Entry(car).State = EntityState.Modified;
+
             _context.Cars.Update(car);
         }
 

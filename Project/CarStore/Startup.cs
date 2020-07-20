@@ -30,6 +30,8 @@ namespace CarStore.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddResponseCaching();
+
             services.AddDbContext<ApiDbContext>(options =>
                 options.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("CarStore.API")));
 
@@ -86,8 +88,6 @@ namespace CarStore.API
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddAutoMapper(typeof(Startup));
 
-            services.AddResponseCaching();
-
             var key = Encoding.ASCII.GetBytes("0ad33b7d-6565-4992-940f-0b09869bf1f9");
             services.AddAuthentication(x =>
             {
@@ -105,8 +105,6 @@ namespace CarStore.API
                     ValidateAudience = false
                 };
             });
-
-           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

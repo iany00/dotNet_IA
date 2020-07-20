@@ -17,5 +17,8 @@ namespace CarStore.Domain.Models
         public IList<Car> Cars { get; set; }
 
         public IList<Order> Orders { get; set; }
+
+        [Timestamp] 
+        public byte[] RowVersion { get; set; }
     }
 }

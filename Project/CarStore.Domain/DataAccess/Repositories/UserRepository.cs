@@ -32,6 +32,7 @@ namespace CarStore.Domain.DataAccess.Repositories
 
         public void Update(User user)
         {
+            _context.Entry(user).State = EntityState.Modified;
             _context.Users.Update(user);
         }
 

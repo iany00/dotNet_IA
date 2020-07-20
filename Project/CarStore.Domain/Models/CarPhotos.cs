@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace CarStore.Domain.Models
 {
@@ -10,5 +11,7 @@ namespace CarStore.Domain.Models
         public DateTimeOffset UploadDate { get; set; } = DateTimeOffset.Now;
         public long FileSize { get; set; }
         public int CarId { get; set; }
+        [Timestamp] 
+        public byte[] RowVersion { get; set; }
     }
 }

@@ -1,17 +1,19 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using CarStore.API.Extensions;
 using CarStore.API.Resource;
 using CarStore.Domain.Models;
 using CarStore.Domain.Services;
+using CarStore.Domain.Services.Communication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarStore.API.Controllers
 {
     [Route("api/[controller]")]
-    [Authorize]
+    //[Authorize]
     public class CarController : Controller
     {
         private readonly ICarService _carService;
@@ -31,6 +33,21 @@ namespace CarStore.API.Controllers
             var resources = _mapper.Map<IEnumerable<Car>, IEnumerable<CarResource>>(cars);
 
             return resources;
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetAsync(int id)
+        {
+            var car = await _carService.GetAsync(id);
+            if (car == null)
+            {
+                return NotFound();
+            }
+
+            var resource = _mapper.Map<Car, CarResource>(car);
+
+            return Ok(resource);
+
         }
 
         [HttpPost]

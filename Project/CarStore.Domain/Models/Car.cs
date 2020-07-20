@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
@@ -24,6 +25,9 @@ namespace CarStore.Domain.Models
         public int CarManufacturerId { get; set; }
         public CarManufacturer CarManufacturer { get; set; }
         public IList<CarPhotos> CarPhotos { get; set; }
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
+
     }
 
 }
