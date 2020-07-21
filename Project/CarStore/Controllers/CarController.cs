@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using CarStore.API.Extensions;
@@ -10,10 +12,11 @@ using CarStore.Domain.Services;
 using CarStore.Domain.Services.Communication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace CarStore.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/store/{storeId}/cars")]
     [Authorize]
     public class CarController : BaseController
     {
@@ -29,18 +32,23 @@ namespace CarStore.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<CarResource>> GetAllAsync()
+        public async Task<IEnumerable<CarResource>> GetAllAsync(int storeId, CancellationToken token)
         {
-            var cars = await _carService.ListAsync();
+            var cars = await _carService.ListAsync(storeId, token);
             var resources = _mapper.Map<IEnumerable<Car>, IEnumerable<CarResource>>(cars);
 
             return resources;
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetAsync(int id)
+        public async Task<IActionResult> GetAsync(int storeId, int id)
         {
-            var car = await _carService.GetAsync(id);
+            if (storeId < 0 || id < 0)
+            {
+                throw new ArgumentException("Negative parameter exception");
+            }
+
+            var car = await _carService.GetAsync(storeId, id);
             if (car == null)
             {
                 return NotFound();
@@ -53,11 +61,11 @@ namespace CarStore.API.Controllers
             var resource = _mapper.Map<Car, CarResource>(car);
 
             return Ok(resource);
-
         }
 
+
         [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody] SaveCarResource resource)
+        public async Task<IActionResult> PostAsync(int storeId, [FromBody] SaveCarResource resource)
         {
             if (!ModelState.IsValid)
             {
@@ -66,7 +74,7 @@ namespace CarStore.API.Controllers
 
             var carModel = _mapper.Map<SaveCarResource, Car>(resource);
 
-            var result = await _carService.SaveAsync(carModel);
+            var result = await _carService.SaveAsync(storeId, carModel);
 
             if (!result.Success)
             {
@@ -79,7 +87,7 @@ namespace CarStore.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAsync(int id, [FromBody] SaveCarResource resource)
+        public async Task<IActionResult> PutAsync(int storeId, int id, [FromBody] SaveCarResource resource)
         {
             if (!ModelState.IsValid)
             {
@@ -95,7 +103,7 @@ namespace CarStore.API.Controllers
 
             var carModel = _mapper.Map<SaveCarResource, Car>(resource);
 
-            var result = await _carService.UpdateAsync(id, carModel, ETag);
+            var result = await _carService.UpdateAsync(storeId, id, carModel, ETag);
 
             if (!result.Success)
             {

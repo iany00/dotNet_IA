@@ -32,6 +32,7 @@ namespace CarStore.API.Controllers
         }
 
         [HttpGet]
+        [Route("/api/Stores")]
         public async Task<IEnumerable<StoreResource>> GetAllAsync()
         {
             var stores = await _storeService.ListAsync();
@@ -58,6 +59,7 @@ namespace CarStore.API.Controllers
             return Ok(resource);
         }
 
+       
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody] SaveStoreResource resource)
         {

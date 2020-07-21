@@ -32,6 +32,13 @@ namespace CarStore.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddResponseCaching();
+            services.AddMemoryCache();
+            //add redis cache
+            services.AddDistributedRedisCache(option =>
+            {
+                option.Configuration = "127.0.0.1";
+                option.InstanceName = "master";
+            });
 
             services.AddDbContext<ApiDbContext>(options =>
                 options.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("CarStore.API")));
@@ -69,6 +76,7 @@ namespace CarStore.API
                 });
             });
 
+            services.AddScoped<ISimpleLogger, SimpleLogger>();
             services.AddScoped<INotificationService, NotificationService>();
 
             services.AddScoped<ICarService, CarService>();

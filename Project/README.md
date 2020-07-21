@@ -15,5 +15,8 @@ Concepts I used:
 - Reflection
 - ETag for PUT
 - Authentication/authorization
+- Middlewares Logs
+![alt text](https://github.com/iany00/dotNet_IA/blob/master/Project/uml.png?raw=true)
 ![alt text](https://github.com/iany00/dotNet_IA/blob/master/Project/swagger.png?raw=true)
+
 

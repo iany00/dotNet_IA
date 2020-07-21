@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using CarStore.Domain.DataAccess.Contexts;
 using CarStore.Domain.Models;
@@ -15,9 +16,12 @@ namespace CarStore.Domain.DataAccess.Repositories
         {
         }
 
-        public async Task<IEnumerable<Car>> ListAsync()
+        public async Task<IEnumerable<Car>> ListAsync(int storeId, CancellationToken token)
         {
-            return await _context.Cars.ToListAsync();
+            return await _context.Cars
+                .Include(c => c.Store)
+                .Where(c => c.Store.Id == storeId)
+                .ToListAsync(token);
         }
 
         public async Task AddAsync(Car car)
@@ -40,6 +44,23 @@ namespace CarStore.Domain.DataAccess.Repositories
         public void Remove(Car car)
         {
             _context.Cars.Remove(car);
+        }
+
+        public async Task<Car> FindStoreCarAsync(int storeId, int id)
+        {
+            return await _context.Cars
+                .Include(c => c.Store)
+                .Where(c => c.Store.Id == storeId)
+                .Where(c => c.Id == id)
+                .FirstOrDefaultAsync();
+        }
+
+        public async Task<IEnumerable<Car>> GetCarList(int storeId)
+        {
+            return await _context.Cars
+                .Include(c => c.Store)
+                .Where(c => c.Store.Id == storeId)
+                .ToListAsync();
         }
     }
 }

@@ -24,6 +24,7 @@ namespace CarStore.Domain.Models
         public User CarHolder { get; set; }
         public int CarManufacturerId { get; set; }
         public CarManufacturer CarManufacturer { get; set; }
+        public Store Store { get; set; }
         public IList<CarPhotos> CarPhotos { get; set; }
         public DateTime LastModified { get; set; }
         [Timestamp]

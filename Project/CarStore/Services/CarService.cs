@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using CarStore.API.Helpers;
 using CarStore.API.Resource;
+using CarStore.Domain.DataAccess.Repositories;
 using CarStore.Domain.Models;
 using CarStore.Domain.Repositories;
 using CarStore.Domain.Services;
@@ -17,26 +19,35 @@ namespace CarStore.API.Services
     public class CarService : ICarService
     {
         private readonly ICarRepository _carRepository;
+        private readonly IStoreRepository _storeRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public CarService(ICarRepository carRepository, IUnitOfWork unitOfWork)
+        public CarService(ICarRepository carRepository, IStoreRepository storeRepository, IUnitOfWork unitOfWork)
         {
             _carRepository = carRepository;
+            _storeRepository = storeRepository;
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Car> GetAsync(int id)
+        public async Task<IEnumerable<Car>> ListAsync(int storeId, CancellationToken token)
         {
-            return await _carRepository.FindByIdAsync(id);
+            return await _carRepository.ListAsync(storeId, token);
         }
 
-        public async Task<IEnumerable<Car>> ListAsync()
+        public async Task<Car> GetAsync(int storeId, int id)
         {
-            return await _carRepository.ListAsync();
+            return await _carRepository.FindStoreCarAsync(storeId, id);
         }
 
-        public async Task<CarResponse> SaveAsync(Car car)
+        public async Task<CarResponse> SaveAsync(int storeId, Car car)
         {
+            var store = await _storeRepository.FindByIdAsync(storeId);
+            if (store == null)
+            {
+                return new CarResponse("Store not found.");
+            }
+
+            car.Store = store;
             try
             {
                 await _carRepository.AddAsync(car);
@@ -52,9 +63,15 @@ namespace CarStore.API.Services
         }
 
 
-        public async Task<CarResponse> UpdateAsync(int id, Car car, string ETag)
+        public async Task<CarResponse> UpdateAsync(int storeId, int id, Car car, string ETag)
         {
             var existingCar = await _carRepository.FindByIdAsync(id);
+
+            var store = await _storeRepository.FindByIdAsync(storeId);
+            if (store == null)
+            {
+                return new CarResponse("Store not found.");
+            }
 
             if (existingCar == null)
             {
@@ -77,7 +94,7 @@ namespace CarStore.API.Services
             existingCar.TransmissionType = car.TransmissionType;
             existingCar.CarHolderId = car.CarHolderId;
             existingCar.CarManufacturerId = car.CarManufacturerId;
-            existingCar.LastModified = DateTime.Now;;
+            existingCar.LastModified = DateTime.Now;
 
             try
             {

@@ -31,6 +31,7 @@ namespace CarStore.API.Controllers
         }
 
         [HttpGet]
+        [Route("/api/Users")]
         public async Task<IEnumerable<UserResource>> GetAllAsync()
         {
             var users = await _userService.ListAsync();

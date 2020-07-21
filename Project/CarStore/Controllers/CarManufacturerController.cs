@@ -32,6 +32,7 @@ namespace CarStore.API.Controllers
         }
 
         [HttpGet]
+        [Route("/api/CarManufacturers")]
         public async Task<IEnumerable<CarManufacturerResource>> GetAllAsync()
         {
             var manufacturers = await _carManufacturerService.ListAsync();

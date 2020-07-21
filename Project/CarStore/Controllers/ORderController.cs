@@ -21,14 +21,17 @@ namespace CarStore.API.Controllers
     {
         private readonly IOrderService _orderService;
         private readonly IMapper _mapper;
+        private readonly INotificationService _notificationService;
 
-        public OrderController(IOrderService orderService, IMapper mapper)
+        public OrderController(IOrderService orderService, IMapper mapper, INotificationService notificationService)
         {
             _orderService = orderService;
             _mapper = mapper;
+            _notificationService = notificationService;
         }
 
         [HttpGet]
+        [Route("/api/Orders")]
         public async Task<IEnumerable<OrderResource>> GetAllAsync()
         {
             var resource = await _orderService.ListAsync();

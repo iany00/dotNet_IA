@@ -98,5 +98,6 @@ namespace CarStore.API.Services
         {
             return await _storeRepository.FindByIdAsync(id);
         }
+
     }
 }
