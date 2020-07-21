@@ -22,11 +22,13 @@ namespace CarStore.API.Controllers
     {
         private readonly IStoreService _storeService;
         private readonly IMapper _mapper;
+        private readonly INotificationService _notificationService;
 
-        public StoreController(IStoreService storeService, IMapper mapper)
+        public StoreController(IStoreService storeService, IMapper mapper, INotificationService notificationService)
         {
             _storeService = storeService;
             _mapper = mapper;
+            _notificationService = notificationService;
         }
 
         [HttpGet]

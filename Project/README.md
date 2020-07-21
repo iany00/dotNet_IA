@@ -13,5 +13,7 @@ Concepts I used:
 - Unit Of Work pattern
 - Extensions
 - Reflection
+- ETag for PUT
+- Authentication/authorization
 ![alt text](https://github.com/iany00/dotNet_IA/blob/master/Project/swagger.png?raw=true)
 

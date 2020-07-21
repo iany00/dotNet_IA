@@ -14,16 +14,18 @@ using Microsoft.AspNetCore.Mvc;
 namespace CarStore.API.Controllers
 {
     [Route("api/[controller]")]
-    //[Authorize]
+    [Authorize]
     public class CarController : BaseController
     {
         private readonly ICarService _carService;
         private readonly IMapper _mapper;
+        private readonly INotificationService _notificationService;
 
-        public CarController(ICarService carService, IMapper mapper)
+        public CarController(ICarService carService, IMapper mapper, INotificationService notificationService)
         {
             _carService = carService;
             _mapper = mapper;
+            _notificationService = notificationService;
         }
 
         [HttpGet]

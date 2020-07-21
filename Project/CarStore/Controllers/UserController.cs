@@ -21,11 +21,13 @@ namespace CarStore.API.Controllers
     {
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
+        private readonly INotificationService _notificationService;
 
-        public UserController(IUserService userService, IMapper mapper)
+        public UserController(IUserService userService, IMapper mapper, INotificationService notificationService)
         {
             _userService = userService;
             _mapper = mapper;
+            _notificationService = notificationService;
         }
 
         [HttpGet]

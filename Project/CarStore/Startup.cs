@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Text;
 using AutoMapper;
+using CarStore.API.Middleware;
 using CarStore.API.Services;
 using CarStore.Domain.DataAccess.Contexts;
 using CarStore.Domain.DataAccess.Repositories;
@@ -118,12 +119,17 @@ namespace CarStore.API
 
                 app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Car Store API V1"); });
             }
+            else
+            {
+                app.UseExceptionHandler("/error");
+            }
 
             app.UseRouting();
 
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseResponseCaching();
+            app.UseMiddleware<RequestLogger>();
 
             app.UseEndpoints(endpoints =>
             {
