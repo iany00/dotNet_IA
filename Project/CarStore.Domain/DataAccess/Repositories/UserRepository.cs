@@ -5,13 +5,14 @@ using System.Threading.Tasks;
 using CarStore.Domain.DataAccess.Contexts;
 using CarStore.Domain.Models;
 using CarStore.Domain.Repositories;
+using CarStore.Domain.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace CarStore.Domain.DataAccess.Repositories
 {
     public class UserRepository : BaseRepository, IUserRepository
     {
-        public UserRepository(ApiDbContext context) : base(context)
+        public UserRepository(ApiDbContext context, ISimpleLogger logger) : base(context, logger)
         {
         }
 

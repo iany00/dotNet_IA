@@ -31,8 +31,6 @@ namespace CarStore.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddResponseCaching();
-            services.AddMemoryCache();
             //add redis cache
             services.AddDistributedRedisCache(option =>
             {
@@ -114,6 +112,9 @@ namespace CarStore.API
                     ValidateAudience = false
                 };
             });
+
+            services.AddResponseCaching();
+            services.AddMemoryCache();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

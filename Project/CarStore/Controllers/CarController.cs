@@ -17,7 +17,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 namespace CarStore.API.Controllers
 {
     [Route("api/store/{storeId}/cars")]
-    [Authorize]
+    //[Authorize]
     public class CarController : BaseController
     {
         private readonly ICarService _carService;

@@ -31,6 +31,7 @@ namespace CarStore.API.Controllers
         }
 
         [HttpGet]
+        [Route("/api/Orders")]
         public async Task<IEnumerable<OrderResource>> GetAllAsync()
         {
             var resource = await _orderService.ListAsync();

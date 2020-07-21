@@ -4,7 +4,7 @@
 
 Web Api, that allows users to buy, sell cars!
 
-Concepts I used:
+I used:
 - Swagger
 - Dependency injection mechanism
 - Repository Pattern
@@ -16,6 +16,7 @@ Concepts I used:
 - ETag for PUT
 - Authentication/authorization
 - Middlewares Logs
+- In memory cache example for GetCars
 ![alt text](https://github.com/iany00/dotNet_IA/blob/master/Project/uml.png?raw=true)
 ![alt text](https://github.com/iany00/dotNet_IA/blob/master/Project/swagger.png?raw=true)
 
