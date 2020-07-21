@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CarStore.API.Helpers;
 using CarStore.Domain.Models;
 using CarStore.Domain.Repositories;
 using CarStore.Domain.Services;
@@ -40,7 +41,7 @@ namespace CarStore.API.Services
             }
         }
 
-        public async Task<StoreResponse> UpdateAsync(int id, Store store)
+        public async Task<StoreResponse> UpdateAsync(int id, Store store, string ETag)
         {
             var existingStore = await _storeRepository.FindByIdAsync(id);
 
@@ -49,8 +50,14 @@ namespace CarStore.API.Services
                 return new StoreResponse("Store Not Found!");
             }
 
+            if (HashFactory.GetHash(existingStore.LastModified.ToString()) != ETag)
+            {
+                return new StoreResponse("Invalid If-match!");
+            }   
+
             existingStore.Name = store.Name;
             existingStore.Address = store.Address;
+            existingStore.LastModified = DateTime.Now;
 
             try
             {
@@ -85,6 +92,11 @@ namespace CarStore.API.Services
             {
                 return new StoreResponse($"An error occurred when deleting the store: {e.Message}");
             }
+        }
+
+        public async Task<Store> GetAsync(int id)
+        {
+            return await _storeRepository.FindByIdAsync(id);
         }
     }
 }

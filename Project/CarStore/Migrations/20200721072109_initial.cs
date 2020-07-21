@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CarStore.API.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,9 @@ namespace CarStore.API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: false)
+                    Name = table.Column<string>(nullable: false),
+                    LastModified = table.Column<DateTime>(nullable: false),
+                    RowVersion = table.Column<byte[]>(rowVersion: true, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -27,7 +29,9 @@ namespace CarStore.API.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: false),
-                    Address = table.Column<string>(nullable: true)
+                    Address = table.Column<string>(nullable: true),
+                    LastModified = table.Column<DateTime>(nullable: false),
+                    RowVersion = table.Column<byte[]>(rowVersion: true, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -42,7 +46,9 @@ namespace CarStore.API.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(nullable: false),
                     CarId = table.Column<int>(nullable: false),
-                    StoreId = table.Column<int>(nullable: false)
+                    StoreId = table.Column<int>(nullable: false),
+                    LastModified = table.Column<DateTime>(nullable: false),
+                    RowVersion = table.Column<byte[]>(rowVersion: true, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -62,7 +68,11 @@ namespace CarStore.API.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: false),
+                    Password = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
                     Role = table.Column<int>(nullable: false),
+                    LastModified = table.Column<DateTime>(nullable: false),
+                    RowVersion = table.Column<byte[]>(rowVersion: true, nullable: true),
                     StoreId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -93,6 +103,8 @@ namespace CarStore.API.Migrations
                     TransmissionType = table.Column<int>(nullable: false),
                     CarHolderId = table.Column<int>(nullable: false),
                     CarManufacturerId = table.Column<int>(nullable: false),
+                    LastModified = table.Column<DateTime>(nullable: false),
+                    RowVersion = table.Column<byte[]>(rowVersion: true, nullable: true),
                     StoreId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -128,7 +140,9 @@ namespace CarStore.API.Migrations
                     Name = table.Column<string>(nullable: true),
                     UploadDate = table.Column<DateTimeOffset>(nullable: false),
                     FileSize = table.Column<long>(nullable: false),
-                    CarId = table.Column<int>(nullable: false)
+                    CarId = table.Column<int>(nullable: false),
+                    LastModified = table.Column<DateTime>(nullable: false),
+                    RowVersion = table.Column<byte[]>(rowVersion: true, nullable: true)
                 },
                 constraints: table =>
                 {

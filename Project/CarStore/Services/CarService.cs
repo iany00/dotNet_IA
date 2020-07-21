@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using CarStore.API.Helpers;
 using CarStore.API.Resource;
 using CarStore.Domain.Models;
 using CarStore.Domain.Repositories;
 using CarStore.Domain.Services;
 using CarStore.Domain.Services.Communication;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CarStore.API.Services
 {
@@ -48,13 +52,18 @@ namespace CarStore.API.Services
         }
 
 
-        public async Task<CarResponse> UpdateAsync(int id, Car car)
+        public async Task<CarResponse> UpdateAsync(int id, Car car, string ETag)
         {
             var existingCar = await _carRepository.FindByIdAsync(id);
 
             if (existingCar == null)
             {
                 return new CarResponse("Car not Found!");
+            }
+
+            if (HashFactory.GetHash(existingCar.LastModified.ToString()) != ETag)
+            {
+                return new CarResponse("Invalid If-match!");
             }
 
             // TODO: how do I fill all the fields at once?
@@ -68,6 +77,7 @@ namespace CarStore.API.Services
             existingCar.TransmissionType = car.TransmissionType;
             existingCar.CarHolderId = car.CarHolderId;
             existingCar.CarManufacturerId = car.CarManufacturerId;
+            existingCar.LastModified = DateTime.Now;;
 
             try
             {

@@ -5,6 +5,7 @@ using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 using AutoMapper;
 using CarStore.API.Extensions;
+using CarStore.API.Helpers;
 using CarStore.API.Resource;
 using CarStore.Domain.Models;
 using CarStore.Domain.Services;
@@ -17,7 +18,7 @@ namespace CarStore.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class StoreController : ControllerBase
+    public class StoreController : BaseController
     {
         private readonly IStoreService _storeService;
         private readonly IMapper _mapper;
@@ -35,6 +36,24 @@ namespace CarStore.API.Controllers
             var resource = _mapper.Map<IEnumerable<Store>, IEnumerable<StoreResource>>(stores);
 
             return resource;
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetAsync(int id)
+        {
+            var store = await _storeService.GetAsync(id);
+            if (store == null)
+            {
+                return NotFound();
+            }
+
+            // Add Header
+            var eTag = HashFactory.GetHash(store.LastModified.ToString());
+            HttpContext.Response.Headers.Add(EtagHeader, eTag);
+
+            var resource = _mapper.Map<Store, StoreResource>(store);
+
+            return Ok(resource);
         }
 
         [HttpPost]
@@ -67,9 +86,16 @@ namespace CarStore.API.Controllers
                 return BadRequest(ModelState.GetErrorMessages());
             }
 
+            // ETag is required
+            if (!HttpContext.Request.Headers.ContainsKey(MatchHeader))
+            {
+                return new StatusCodeResult(412);
+            }
+            var ETag = HttpContext.Request.Headers[MatchHeader];
+
             var store = _mapper.Map<SaveStoreResource, Store>(resource);
 
-            var result = await _storeService.UpdateAsync(id, store);
+            var result = await _storeService.UpdateAsync(id, store, ETag);
 
             if (!result.Success)
             {

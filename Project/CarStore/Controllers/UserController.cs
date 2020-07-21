@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using CarStore.API.Extensions;
+using CarStore.API.Helpers;
 using CarStore.API.Resource;
 using CarStore.Domain.Models;
 using CarStore.Domain.Services;
@@ -16,7 +17,7 @@ namespace CarStore.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class UserController : ControllerBase
+    public class UserController : BaseController
     {
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
@@ -35,6 +36,24 @@ namespace CarStore.API.Controllers
             var resource = _mapper.Map<IEnumerable<User>, IEnumerable<UserResource>>(users);
 
             return resource;
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetAsync(int id)
+        {
+            var user = await _userService.GetAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            // Add Header
+            var eTag = HashFactory.GetHash(user.LastModified.ToString());
+            HttpContext.Response.Headers.Add(EtagHeader, eTag);
+
+            var resource = _mapper.Map<User, UserResource>(user);
+
+            return Ok(resource);
         }
 
 
@@ -68,9 +87,16 @@ namespace CarStore.API.Controllers
                 return BadRequest(ModelState.GetErrorMessages());
             }
 
+            // ETag is required
+            if (!HttpContext.Request.Headers.ContainsKey(MatchHeader))
+            {
+                return new StatusCodeResult(412);
+            }
+            var ETag = HttpContext.Request.Headers[MatchHeader];
+
             var user = _mapper.Map<SaveUserResource, User>(resource);
 
-            var result = await _userService.UpdateAsync(id, user);
+            var result = await _userService.UpdateAsync(id, user, ETag);
 
             if (!result.Success)
             {

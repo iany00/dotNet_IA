@@ -9,11 +9,12 @@ namespace CarStore.Domain.Services
 {
     public interface ICarManufacturerService
     {
+        Task<CarManufacturer> GetAsync(int id);
         Task<IEnumerable<CarManufacturer>> ListAsync();
 
         Task<CarManufacturerResponse> SaveAsync(CarManufacturer manufacturer);
 
-        Task<CarManufacturerResponse> UpdateAsync(int id, CarManufacturer manufacturer);
+        Task<CarManufacturerResponse> UpdateAsync(int id, CarManufacturer manufacturer, string ETag);
         Task<CarManufacturerResponse> DeleteAsync(int id);
     }
 }

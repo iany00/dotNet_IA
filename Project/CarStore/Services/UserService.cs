@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CarStore.API.Helpers;
 using CarStore.Domain.Models;
 using CarStore.Domain.Repositories;
 using CarStore.Domain.Services;
@@ -40,7 +41,7 @@ namespace CarStore.API.Services
             }
         }
 
-        public async Task<UserResponse> UpdateAsync(int id, User user)
+        public async Task<UserResponse> UpdateAsync(int id, User user, string ETag)
         {
             var existingUser = await _userRepository.FindByIdAsync(id);
 
@@ -49,8 +50,14 @@ namespace CarStore.API.Services
                 return new UserResponse("User not found!");
             }
 
+            if (HashFactory.GetHash(existingUser.LastModified.ToString()) != ETag)
+            {
+                return new UserResponse("Invalid If-match!");
+            }
+
             existingUser.Name = user.Name;
             existingUser.Role = user.Role;
+            existingUser.LastModified = DateTime.Now;
 
             try
             {
@@ -85,6 +92,11 @@ namespace CarStore.API.Services
             {
                 return new UserResponse($"An error occurred when deleting the user: {e.Message}");
             }
+        }
+
+        public async Task<User> GetAsync(int id)
+        {
+            return await _userRepository.FindByIdAsync(id);
         }
     }
 }

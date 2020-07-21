@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace CarStore.Domain.Models
@@ -10,7 +11,7 @@ namespace CarStore.Domain.Models
         public string Name { get; set; }
 
         public ICollection<Car> Cars { get; set; }
-
+        public DateTime LastModified { get; set; }
         [Timestamp] 
         public byte[] RowVersion { get; set; }
     }

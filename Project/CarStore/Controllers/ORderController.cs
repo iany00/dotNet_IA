@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using CarStore.API.Extensions;
+using CarStore.API.Helpers;
 using CarStore.API.Resource;
 using CarStore.Domain.Models;
 using CarStore.Domain.Services;
@@ -16,7 +17,7 @@ namespace CarStore.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class OrderController : ControllerBase
+    public class OrderController : BaseController
     {
         private readonly IOrderService _orderService;
         private readonly IMapper _mapper;
@@ -35,6 +36,24 @@ namespace CarStore.API.Controllers
             var orderResource = _mapper.Map<IEnumerable<Order>, IEnumerable<OrderResource>>(resource);
 
             return orderResource;
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetAsync(int id)
+        {
+            var order = await _orderService.GetAsync(id);
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            // Add Header
+            var eTag = HashFactory.GetHash(order.LastModified.ToString());
+            HttpContext.Response.Headers.Add(EtagHeader, eTag);
+
+            var resource = _mapper.Map<Order, OrderResource>(order);
+
+            return Ok(resource);
         }
 
         [HttpPost]
@@ -67,9 +86,16 @@ namespace CarStore.API.Controllers
                 return BadRequest(ModelState.GetErrorMessages());
             }
 
+            // ETag is required
+            if (!HttpContext.Request.Headers.ContainsKey(MatchHeader))
+            {
+                return new StatusCodeResult(412);
+            }
+            var ETag = HttpContext.Request.Headers[MatchHeader];
+
             var order = _mapper.Map<SaveOrderResource, Order>(resource);
 
-            var result = await _orderService.UpdateAsync(id, order);
+            var result = await _orderService.UpdateAsync(id, order, ETag);
 
             if (!result.Success)
             {

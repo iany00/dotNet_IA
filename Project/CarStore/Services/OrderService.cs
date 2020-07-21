@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CarStore.API.Helpers;
 using CarStore.Domain.Models;
 using CarStore.Domain.Repositories;
 using CarStore.Domain.Services;
@@ -25,6 +26,12 @@ namespace CarStore.API.Services
             return await _orderRepository.ListAsync();
         }
 
+
+        public async Task<Order> GetAsync(int id)
+        {
+            return await _orderRepository.FindByIdAsync(id);
+        }
+
         public async Task<OrderResponse> SaveAsync(Order order)
         {
             try
@@ -40,7 +47,7 @@ namespace CarStore.API.Services
             }
         }
 
-        public async Task<OrderResponse> UpdateAsync(int id, Order order)
+        public async Task<OrderResponse> UpdateAsync(int id, Order order, string ETag)
         {
             var existingOrder = await _orderRepository.FindByIdAsync(id);
 
@@ -49,9 +56,15 @@ namespace CarStore.API.Services
                 return new OrderResponse("Order not Found!");
             }
 
+            if (HashFactory.GetHash(existingOrder.LastModified.ToString()) != ETag)
+            {
+                return new OrderResponse("Invalid If-match!");
+            }
+
             existingOrder.CarId = order.CarId;
             existingOrder.StoreId = order.StoreId;
             existingOrder.UserId = order.UserId;
+            existingOrder.LastModified = DateTime.Now;
 
             try
             {
@@ -87,5 +100,6 @@ namespace CarStore.API.Services
                 return new OrderResponse($"An error occurred when deleting the order: {e.Message}");
             }
         }
+
     }
 }

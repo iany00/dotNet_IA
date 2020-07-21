@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using CarStore.API.Extensions;
+using CarStore.API.Helpers;
 using CarStore.API.Resource;
 using CarStore.Domain.Models;
 using CarStore.Domain.Services;
@@ -16,7 +17,7 @@ namespace CarStore.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class CarManufacturerController : ControllerBase
+    public class CarManufacturerController : BaseController
     {
         private readonly ICarManufacturerService _carManufacturerService;
         private readonly IMapper _mapper;
@@ -34,6 +35,24 @@ namespace CarStore.API.Controllers
             var resource = _mapper.Map<IEnumerable<CarManufacturer>, IEnumerable<CarManufacturerResource>>(manufacturers);
             
             return resource;
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetAsync(int id)
+        {
+            var manufacturer = await _carManufacturerService.GetAsync(id);
+            if (manufacturer == null)
+            {
+                return NotFound();
+            }
+
+            // Add Header
+            var eTag = HashFactory.GetHash(manufacturer.LastModified.ToString());
+            HttpContext.Response.Headers.Add(EtagHeader, eTag);
+
+            var resource = _mapper.Map<CarManufacturer, CarManufacturerResource>(manufacturer);
+            
+            return Ok(resource);
         }
 
         [HttpPost]
@@ -65,9 +84,16 @@ namespace CarStore.API.Controllers
                 return BadRequest(ModelState.GetErrorMessages());
             }
 
+            // ETag is required
+            if (!HttpContext.Request.Headers.ContainsKey(MatchHeader))
+            {
+                return new StatusCodeResult(412);
+            }
+            var ETag = HttpContext.Request.Headers[MatchHeader];
+
             var manufacturer = _mapper.Map<SaveCarManufacturerResource, CarManufacturer>(resource);
 
-            var result = await _carManufacturerService.UpdateAsync(id, manufacturer);
+            var result = await _carManufacturerService.UpdateAsync(id, manufacturer, ETag);
 
             if (!result.Success)
             {

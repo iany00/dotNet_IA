@@ -25,6 +25,7 @@ namespace CarStore.Domain.Models
         public int CarManufacturerId { get; set; }
         public CarManufacturer CarManufacturer { get; set; }
         public IList<CarPhotos> CarPhotos { get; set; }
+        public DateTime LastModified { get; set; }
         [Timestamp]
         public byte[] RowVersion { get; set; }
 

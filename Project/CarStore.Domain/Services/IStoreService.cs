@@ -12,7 +12,8 @@ namespace CarStore.Domain.Services
         Task<IEnumerable<Store>> ListAsync();
         Task<StoreResponse> SaveAsync(Store store);
 
-        Task<StoreResponse> UpdateAsync(int id, Store store);
+        Task<StoreResponse> UpdateAsync(int id, Store store, string ETag);
         Task<StoreResponse> DeleteAsync(int id);
+        Task<Store> GetAsync(int id);
     }
 }

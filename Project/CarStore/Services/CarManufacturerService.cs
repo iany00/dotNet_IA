@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using CarStore.API.Helpers;
 using CarStore.Domain.Models;
 using CarStore.Domain.Repositories;
 using CarStore.Domain.Services;
@@ -14,7 +15,6 @@ namespace CarStore.API.Services
     {
         private readonly ICarManufacturerRepository _carManufacturerRepository;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
 
 
         public CarManufacturerService(ICarManufacturerRepository carManufacturerRepository, IUnitOfWork unitOfWork)
@@ -38,6 +38,11 @@ namespace CarStore.API.Services
 
         }
 
+        public async Task<CarManufacturer> GetAsync(int id)
+        {
+            return await _carManufacturerRepository.FindByIdAsync(id);
+        }
+
         public async Task<IEnumerable<CarManufacturer>> ListAsync()
         {
             return await _carManufacturerRepository.ListAsync();
@@ -59,7 +64,7 @@ namespace CarStore.API.Services
             }
         }
 
-        public async Task<CarManufacturerResponse> UpdateAsync(int id, CarManufacturer manufacturer)
+        public async Task<CarManufacturerResponse> UpdateAsync(int id, CarManufacturer manufacturer, string ETag)
         {
             var existingManufacturer = await _carManufacturerRepository.FindByIdAsync(id);
 
@@ -68,7 +73,13 @@ namespace CarStore.API.Services
                 return new CarManufacturerResponse("Car Manufacturer not found.");
             }
 
+            if (HashFactory.GetHash(existingManufacturer.LastModified.ToString()) != ETag)
+            {
+                return new CarManufacturerResponse("Invalid If-match!");
+            }
+
             existingManufacturer.Name = manufacturer.Name;
+            existingManufacturer.LastModified = DateTime.Now;
 
             try
             {

@@ -13,7 +13,7 @@ namespace CarStore.Domain.Services
         Task<IEnumerable<Car>> ListAsync();
         Task<CarResponse> SaveAsync(Car car);
 
-        Task<CarResponse> UpdateAsync(int id, Car car);
+        Task<CarResponse> UpdateAsync(int id, Car car, string ETag);
         Task<CarResponse> DeleteAsync(int id);
     }
 

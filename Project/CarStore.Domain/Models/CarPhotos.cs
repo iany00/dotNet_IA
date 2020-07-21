@@ -11,6 +11,7 @@ namespace CarStore.Domain.Models
         public DateTimeOffset UploadDate { get; set; } = DateTimeOffset.Now;
         public long FileSize { get; set; }
         public int CarId { get; set; }
+        public DateTime LastModified { get; set; }
         [Timestamp] 
         public byte[] RowVersion { get; set; }
     }
