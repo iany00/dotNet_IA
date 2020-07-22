@@ -115,6 +115,13 @@ namespace CarStore.API
 
             services.AddResponseCaching();
             services.AddMemoryCache();
+
+            //add redis cache
+            services.AddDistributedRedisCache(option =>
+            {
+                option.Configuration = "127.0.0.1";
+                option.InstanceName = "master";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

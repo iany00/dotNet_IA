@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using CarStore.API.Helpers;
 using CarStore.Domain.Models;
@@ -13,27 +14,34 @@ namespace CarStore.API.Services
     public class OrderService : IOrderService
     {
         private readonly IOrderRepository _orderRepository;
+        private readonly IStoreRepository _storeRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public OrderService(IOrderRepository orderRepository, IUnitOfWork unitOfWork)
+        public OrderService(IOrderRepository orderRepository, IStoreRepository storeRepository, IUnitOfWork unitOfWork)
         {
             _orderRepository = orderRepository;
+            _storeRepository = storeRepository;
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<IEnumerable<Order>> ListAsync()
+        public async Task<IEnumerable<Order>> ListAsync(int storeId, CancellationToken token)
         {
-            return await _orderRepository.ListAsync();
+            return await _orderRepository.ListAsync(storeId, token);
         }
 
-
-        public async Task<Order> GetAsync(int id)
+        public async Task<Order> GetAsync(int storeId, int id)
         {
-            return await _orderRepository.FindByIdAsync(id);
+            return await _orderRepository.FindStoreOrderAsync(storeId, id);
         }
 
-        public async Task<OrderResponse> SaveAsync(Order order)
+        public async Task<OrderResponse> SaveAsync(int storeId, Order order)
         {
+            var store = await _storeRepository.FindByIdAsync(storeId);
+            if (store == null)
+            {
+                return new OrderResponse("Store not found.");
+            }
+
             try
             {
                 await _orderRepository.AddAsync(order);
@@ -47,10 +55,15 @@ namespace CarStore.API.Services
             }
         }
 
-        public async Task<OrderResponse> UpdateAsync(int id, Order order, string ETag)
+        public async Task<OrderResponse> UpdateAsync(int storeId, int id, Order order, string ETag)
         {
-            var existingOrder = await _orderRepository.FindByIdAsync(id);
+            var store = await _storeRepository.FindByIdAsync(storeId);
+            if (store == null)
+            {
+                return new OrderResponse("Store not found.");
+            }
 
+            var existingOrder = await _orderRepository.FindByIdAsync(id);
             if (existingOrder == null)
             {
                 return new OrderResponse("Order not Found!");
@@ -100,6 +113,5 @@ namespace CarStore.API.Services
                 return new OrderResponse($"An error occurred when deleting the order: {e.Message}");
             }
         }
-
     }
 }

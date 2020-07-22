@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using CarStore.API.Extensions;
@@ -14,9 +15,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CarStore.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/store/{storeId}/orders")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class OrderController : BaseController
     {
         private readonly IOrderService _orderService;
@@ -31,10 +32,9 @@ namespace CarStore.API.Controllers
         }
 
         [HttpGet]
-        [Route("/api/Orders")]
-        public async Task<IEnumerable<OrderResource>> GetAllAsync()
+        public async Task<IEnumerable<OrderResource>> GetAllAsync(int storeId, CancellationToken token)
         {
-            var resource = await _orderService.ListAsync();
+            var resource = await _orderService.ListAsync(storeId, token);
 
             var orderResource = _mapper.Map<IEnumerable<Order>, IEnumerable<OrderResource>>(resource);
 
@@ -42,9 +42,9 @@ namespace CarStore.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetAsync(int id)
+        public async Task<IActionResult> GetAsync(int storeId, int id)
         {
-            var order = await _orderService.GetAsync(id);
+            var order = await _orderService.GetAsync(storeId, id);
             if (order == null)
             {
                 return NotFound();
@@ -60,7 +60,7 @@ namespace CarStore.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody] SaveOrderResource resource)
+        public async Task<IActionResult> PostAsync(int storeId, [FromBody] SaveOrderResource resource)
         {
             if (!ModelState.IsValid)
             {
@@ -69,7 +69,7 @@ namespace CarStore.API.Controllers
 
             var order = _mapper.Map<SaveOrderResource, Order>(resource);
 
-            var result = await _orderService.SaveAsync(order);
+            var result = await _orderService.SaveAsync(storeId, order);
 
             if (!result.Success)
             {
@@ -82,7 +82,7 @@ namespace CarStore.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAsync(int id, [FromBody] SaveOrderResource resource)
+        public async Task<IActionResult> PutAsync(int storeId, int id, [FromBody] SaveOrderResource resource)
         {
             if (!ModelState.IsValid)
             {
@@ -98,7 +98,7 @@ namespace CarStore.API.Controllers
 
             var order = _mapper.Map<SaveOrderResource, Order>(resource);
 
-            var result = await _orderService.UpdateAsync(id, order, ETag);
+            var result = await _orderService.UpdateAsync(storeId, id, order, ETag);
 
             if (!result.Success)
             {

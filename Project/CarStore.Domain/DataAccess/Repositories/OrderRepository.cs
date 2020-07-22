@@ -1,24 +1,57 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using CarStore.Domain.DataAccess.Contexts;
 using CarStore.Domain.Models;
 using CarStore.Domain.Repositories;
 using CarStore.Domain.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace CarStore.Domain.DataAccess.Repositories
 {
     public class OrderRepository : BaseRepository, IOrderRepository
     {
-        public OrderRepository(ApiDbContext context, ISimpleLogger logger) : base(context, logger)
+        private readonly IDistributedCache _cache;
+        public OrderRepository(ApiDbContext context, ISimpleLogger logger, IDistributedCache cache) : base(context, logger)
         {
+            _cache = cache;
         }
 
-        public async Task<IEnumerable<Order>> ListAsync()
+        // Distributed cache used
+        public async Task<IEnumerable<Order>> ListAsync(int storeId, CancellationToken token)
         {
-            return await _context.Orders.ToListAsync();
+            var key = $"_orders_for_store_{storeId}";
+
+            var orders = _cache.GetString(key);
+
+            if (!string.IsNullOrEmpty(orders))
+            {
+                this._logger.LogInfo("DistributedCachedOrders-Get(storeId) cache hit");
+
+                var orderList = Deserialize<List<Order>>(orders);
+
+                return orderList;
+            }
+            else
+            {
+                this._logger.LogInfo("DistributedCachedOrders-Get(hotelId) db hit");
+
+                var ordersEntities= await _context.Orders
+                    .Include(c => c.Store)
+                    .Where(c => c.Store.Id == storeId)
+                    .ToListAsync(token);
+
+                var options = new DistributedCacheEntryOptions();
+                options.SetAbsoluteExpiration(TimeSpan.FromSeconds(3));
+
+                _cache.SetString(key, Serialize(ordersEntities), options);
+
+                return ordersEntities;
+            }
         }
 
         public async Task AddAsync(Order order)
@@ -29,6 +62,15 @@ namespace CarStore.Domain.DataAccess.Repositories
         public async Task<Order> FindByIdAsync(int id)
         {
             return await _context.Orders.FindAsync(id);
+        }
+
+        public async Task<Order> FindStoreOrderAsync(int storeId, int id)
+        {
+            return await _context.Orders
+                .Include(c => c.Store)
+                .Where(c => c.Store.Id == storeId)
+                .Where(c => c.Id == id)
+                .FirstOrDefaultAsync();
         }
 
         public void Update(Order order)

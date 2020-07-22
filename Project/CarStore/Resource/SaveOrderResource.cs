@@ -12,5 +12,7 @@ namespace CarStore.API.Resource
         public int CarId { get; set; }
 
         public int StoreId { get; set; }
+
+        public int Invoice { get; set; }
     }
 }

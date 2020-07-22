@@ -26,7 +26,7 @@ namespace CarStore.Domain.DataAccess.Repositories
         {
             var key = $"_cars_for_store_{storeId}";
 
-            // In Memory cache
+            // In Memory cache used
             var list = await _memoryCache.GetOrCreateAsync(key, entry =>
             {
                 var cacheTokenSource = this._memoryCache.GetOrCreate($"_CTS{storeId}", cacheEntry => new CancellationTokenSource());
