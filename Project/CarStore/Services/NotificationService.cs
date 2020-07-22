@@ -21,7 +21,7 @@ namespace CarStore.API.Services
 
         public void Notify(string message)
         {
-            this.logger.LogInformation($"{this.id} : {message}");
+            this.logger.LogWarning($"{this.id} : {message}");
         }
     }
 }

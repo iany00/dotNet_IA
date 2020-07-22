@@ -44,6 +44,11 @@ namespace CarStore.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAsync(int storeId, int id)
         {
+            if (storeId < 0 || id < 0)
+            {
+                throw new ArgumentException("Negative parameter exception");
+            }
+
             var order = await _orderService.GetAsync(storeId, id);
             if (order == null)
             {

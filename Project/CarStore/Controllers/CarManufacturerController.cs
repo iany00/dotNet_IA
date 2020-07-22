@@ -44,6 +44,11 @@ namespace CarStore.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAsync(int id)
         {
+            if (id < 0)
+            {
+                throw new ArgumentException("Negative parameter exception");
+            }
+
             var manufacturer = await _carManufacturerService.GetAsync(id);
             if (manufacturer == null)
             {

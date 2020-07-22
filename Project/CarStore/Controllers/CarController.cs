@@ -81,6 +81,8 @@ namespace CarStore.API.Controllers
                 return BadRequest(result.Message);
             }
 
+            this._notificationService.Notify("Car created!");
+
             var carResource = _mapper.Map<Car, CarResource>(result.Car);
 
             return Ok(carResource);
