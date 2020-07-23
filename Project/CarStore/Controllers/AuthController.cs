@@ -13,6 +13,8 @@ namespace CarStore.API.Controllers
 {
     [Route("api/auth")]
     [ApiController]
+    [ApiExplorerSettings(IgnoreApi = true)]
+    // This was user before user auth was implemented
     public class AuthController : ControllerBase
     {
         [HttpGet("")]

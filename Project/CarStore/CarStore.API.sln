@@ -17,6 +17,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestCarStore", "..\TestCarS
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTests", "..\IntegrationTests\IntegrationTests.csproj", "{E1CA62CF-764E-488B-9CF0-61BDE6480EF9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1A948511-0D39-422E-8346-EB536B719855} = {1A948511-0D39-422E-8346-EB536B719855}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

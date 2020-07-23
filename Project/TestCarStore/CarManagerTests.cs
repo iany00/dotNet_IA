@@ -33,7 +33,7 @@ namespace TestCarStore
         };
 
         [Fact]
-        public void GetCarById_ReturnCar()
+        public void CreateCar_ReturnNotNull()
         {
             //arrange
             var uow = A.Fake<IUnitOfWork>();
@@ -42,22 +42,6 @@ namespace TestCarStore
             var carRepository = A.Fake<ICarRepository>();
 
             var carManager = new CarService(carRepository, storeRepository, uow);
-
-            //action
-            A.CallTo(() => carRepository.FindByIdAsync(1)).Returns(car);
-
-            //assert
-            Assert.Equal(mapper.Map<Car>(car), carManager.GetAsync(1,1).Result);
-        }
-
-       /* [Fact]
-        public void CreateCar_ReturnNotNull()
-        {
-            //arrange
-            var uow = A.Fake<IUnitOfWork>();
-            var mapper = A.Fake<IMapper>();
-
-            var carManager = new CarManager(uow, mapper);
             var car = new Car()
             {
                 Id = 1,
@@ -75,94 +59,94 @@ namespace TestCarStore
             };
 
             //action
-            A.CallTo(() => uow.CarRepo.CreateAsync(car)).Returns(car);
+            A.CallTo(() => carRepository.AddAsync(car));
 
             //assert
-            Assert.NotNull(carManager.CreateAsync(mapper.Map<CarDto>(car)));
+            Assert.NotNull(carManager.SaveAsync(1, car));
         }
-
+        
         [Fact]
         public void UpdateCar_ReturnNotEqual()
         {
-            //arrange
             var uow = A.Fake<IUnitOfWork>();
             var mapper = A.Fake<IMapper>();
+            var storeRepository = A.Fake<IStoreRepository>();
+            var carRepository = A.Fake<ICarRepository>();
 
-            var carManager = new CarManager(uow, mapper);
+            var carManager = new CarService(carRepository, storeRepository, uow);
 
             var updatedCar = new Car()
             {
-                Id = 1,
                 CarHolderId = car.CarHolderId,
                 CarManufacturerId = car.CarManufacturerId,
-                DriveTrainType = car.DriveTrainType,
                 EngineType = car.EngineType,
                 FuelType = car.FuelType,
-                EngineVolume = car.EngineVolume,
                 Model = "updated model Mock",
-                LongDescription = car.LongDescription,
+                Description = car.Description,
                 Price = car.Price,
                 SeatsAmount = car.SeatsAmount,
-                SpeedsAmount = car.SpeedsAmount,
-                ShortDescription = car.ShortDescription,
                 TransmissionType = car.TransmissionType,
                 Year = car.Year
             };
 
             //action
-            A.CallTo(() => uow.CarRepo.UpdateAsync(car)).Returns(updatedCar);
+            A.CallTo(() => carRepository.Update(car));
 
             //assert
-            Assert.NotSame(mapper.Map<CarDto>(car), carManager.UpdateAsync(mapper.Map<CarDto>(car)).Result);
+            Assert.NotSame(mapper.Map<CarResource>(car), carManager.UpdateAsync(1,1,car,"").Result);
         }
-
+        
         [Fact]
         public void DeleteByIdAsync_ReturnTrue()
         {
             //arrange
             var uow = A.Fake<IUnitOfWork>();
-            var mapper = A.Fake<IMapper>();
+            var storeRepository = A.Fake<IStoreRepository>();
+            var carRepository = A.Fake<ICarRepository>();
 
-            var carManager = new CarManager(uow, mapper);
+            var carManager = new CarService(carRepository, storeRepository, uow);
 
             //action
-            A.CallTo(() => uow.CarRepo.GetById(10)).Returns(car);
+            A.CallTo(() => carRepository.FindByIdAsync(10)).Returns(car);
 
             //assert
-            Assert.True(carManager.DeleteByIdAsync(10).Result.Succeeded);
+            Assert.True(carManager.DeleteAsync(10).Result.Success);
         }
-
+        
         [Fact]
         public void DeleteByIdAsync_InvalidCarId_ReturnFalse()
         {
             //arrange
             var uow = A.Fake<IUnitOfWork>();
-            var mapper = A.Fake<IMapper>();
+            var storeRepository = A.Fake<IStoreRepository>();
+            var carRepository = A.Fake<ICarRepository>();
 
-            var carManager = new CarManager(uow, mapper);
+            var carManager = new CarService(carRepository, storeRepository, uow);
             Car notExistingCar = null;
 
             //action
-            A.CallTo(() => uow.CarRepo.GetById(10)).Returns(notExistingCar);
+            A.CallTo(() => carRepository.FindByIdAsync(10)).Returns(notExistingCar);
 
             //assert
-            Assert.False(carManager.DeleteByIdAsync(10).Result.Succeeded);
+            Assert.False(carManager.DeleteAsync(10).Result.Success);
         }
-
+        
         [Fact]
-        public void UpdateAsync_nullCarDto_ReturnNull()
+        public void UpdateAsync_nullCar_ReturnNull()
         {
             //arrange
             var uow = A.Fake<IUnitOfWork>();
-            var mapper = A.Fake<IMapper>();
-            var carManager = new CarManager(uow, mapper);
-            CarDto nullCarDto = null;
+            var storeRepository = A.Fake<IStoreRepository>();
+            var carRepository = A.Fake<ICarRepository>();
+
+            var carManager = new CarService(carRepository, storeRepository, uow);
+            Car nullCar = null;
 
             //action
-            A.CallTo(() => uow.CarRepo.GetById(car.Id)).Returns(car);
+            A.CallTo(() => carRepository.FindByIdAsync(car.Id)).Returns(car);
 
             //assert
-            Assert.Null(carManager.UpdateAsync(nullCarDto).Result);
-        }*/
+            Assert.False(carManager.UpdateAsync(1, 1, nullCar, "").Result.Success);
+        }
     }
 }

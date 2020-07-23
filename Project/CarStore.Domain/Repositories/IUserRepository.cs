@@ -15,5 +15,6 @@ namespace CarStore.Domain.Repositories
         void Update(User user);
 
         void Remove(User user);
+        User FindByUsername(string username);
     }
 }

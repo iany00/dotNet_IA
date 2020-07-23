@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using CarStore.API.Extensions;
@@ -11,23 +14,80 @@ using CarStore.Domain.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 
 namespace CarStore.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class UserController : BaseController
     {
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
-        private readonly INotificationService _notificationService;
+        private readonly AppSettings _appSettings;
 
-        public UserController(IUserService userService, IMapper mapper, INotificationService notificationService)
+        public UserController(IUserService userService, IMapper mapper, IOptions<AppSettings> appSettings)
         {
             _userService = userService;
             _mapper = mapper;
-            _notificationService = notificationService;
+            _appSettings = appSettings.Value;
+        }
+
+        [AllowAnonymous]
+        [HttpPost("authenticate")]
+        public IActionResult Authenticate([FromBody]AuthenticateModel model)
+        {
+            var user = _userService.Authenticate(model.Username, model.Password);
+
+            if (user == null)
+            {
+                return BadRequest(new { message = "Username or password is incorrect" });
+            }
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.Name, user.Id.ToString())
+                }),
+                Expires = DateTime.UtcNow.AddDays(7),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            var tokenString = tokenHandler.WriteToken(token);
+
+            // return basic user info and authentication token
+            return Ok(new
+            {
+                Id = user.Id,
+                Username = user.UserName,
+                Name = user.Name,
+                Token = tokenString
+            });
+        }
+        
+        [AllowAnonymous]
+        [HttpPost("register")]
+        public async Task<IActionResult>Register([FromBody]SaveUserResource model)
+        {
+            // map model to entity
+            var user = _mapper.Map<SaveUserResource, User>(model);
+
+            // create user
+            var result = await _userService.Register(user, model.Password);
+             
+            if (!result.Success)
+            {
+                return BadRequest(result.Message);
+            }
+
+            var userResource = _mapper.Map<User, UserResource>(result.User);
+
+            return Ok(userResource);
         }
 
         [HttpGet]
@@ -66,6 +126,7 @@ namespace CarStore.API.Controllers
 
 
         [HttpPost]
+        [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> PostAsync([FromBody] SaveUserResource resource)
         {
             if (!ModelState.IsValid)

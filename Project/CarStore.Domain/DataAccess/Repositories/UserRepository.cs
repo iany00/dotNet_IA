@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CarStore.Domain.DataAccess.Contexts;
@@ -41,5 +42,11 @@ namespace CarStore.Domain.DataAccess.Repositories
         {
             _context.Users.Remove(user);
         }
+
+        public User FindByUsername(string username)
+        {
+             return _context.Users.SingleOrDefault(x => x.UserName == username);
+        }
+
     }
 }

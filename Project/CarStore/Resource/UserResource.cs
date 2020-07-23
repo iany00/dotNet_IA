@@ -13,6 +13,10 @@ namespace CarStore.API.Resource
         [Required]
         public string Name { get; set; }
         [Required]
+        public string UserName { get; set; }
+        [Required]
+        public string Email { get; set; }
+        [Required]
         public ERole Role { get; set; }
     }
 }
