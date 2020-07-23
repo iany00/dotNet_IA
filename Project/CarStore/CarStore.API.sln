@@ -10,16 +10,24 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarStore.API", "CarStore.AP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarStore.Domain", "..\CarStore.Domain\CarStore.Domain.csproj", "{E7603A24-0436-4F00-BEE9-F9A607532036}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestCarStore", "..\TestCarStore\TestCarStore.csproj", "{70C6868E-B062-45E2-B1CD-CF4CE2487D35}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestCarStore", "..\TestCarStore\TestCarStore.csproj", "{70C6868E-B062-45E2-B1CD-CF4CE2487D35}"
 	ProjectSection(ProjectDependencies) = postProject
 		{1A948511-0D39-422E-8346-EB536B719855} = {1A948511-0D39-422E-8346-EB536B719855}
 		{E7603A24-0436-4F00-BEE9-F9A607532036} = {E7603A24-0436-4F00-BEE9-F9A607532036}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTests", "..\IntegrationTests\IntegrationTests.csproj", "{E1CA62CF-764E-488B-9CF0-61BDE6480EF9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationTests", "..\IntegrationTests\IntegrationTests.csproj", "{E1CA62CF-764E-488B-9CF0-61BDE6480EF9}"
 	ProjectSection(ProjectDependencies) = postProject
 		{1A948511-0D39-422E-8346-EB536B719855} = {1A948511-0D39-422E-8346-EB536B719855}
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarStore.WebApplication", "..\CarStoreClient\CarStore.WebApplication.csproj", "{13193BEB-9352-4EE0-88D5-CBA13D89DEE9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1A948511-0D39-422E-8346-EB536B719855} = {1A948511-0D39-422E-8346-EB536B719855}
+		{D812D8A0-0504-4400-B16F-865B1ED920D1} = {D812D8A0-0504-4400-B16F-865B1ED920D1}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarStore.ApiClient", "..\CarStore.ApiClient\CarStore.ApiClient.csproj", "{D812D8A0-0504-4400-B16F-865B1ED920D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +51,14 @@ Global
 		{E1CA62CF-764E-488B-9CF0-61BDE6480EF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1CA62CF-764E-488B-9CF0-61BDE6480EF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1CA62CF-764E-488B-9CF0-61BDE6480EF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13193BEB-9352-4EE0-88D5-CBA13D89DEE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13193BEB-9352-4EE0-88D5-CBA13D89DEE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13193BEB-9352-4EE0-88D5-CBA13D89DEE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13193BEB-9352-4EE0-88D5-CBA13D89DEE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D812D8A0-0504-4400-B16F-865B1ED920D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D812D8A0-0504-4400-B16F-865B1ED920D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D812D8A0-0504-4400-B16F-865B1ED920D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D812D8A0-0504-4400-B16F-865B1ED920D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

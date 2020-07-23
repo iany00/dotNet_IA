@@ -1,0 +1,66 @@
+﻿@model IEnumerable<CarStore.ApiClient.Models.CarModel>
+
+@{
+    ViewData["Title"] = "Cars";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Cars</h1>
+</div>
+
+<table id="carsTable" class="table display" style="width:100%">
+    <thead>
+    <tr>
+        <th>
+            Id
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            Address
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.Id
+            </td>
+            <td>
+                @item.Model
+            </td>
+            <td>
+                @item.Description
+            </td>
+            <td>
+                @item.Year
+            </td>
+            <td>
+                @item.Price
+            </td>
+            <td>
+                @item.Currency
+            </td>
+            <td>
+                @item.EngineType
+            </td>
+            <td>
+                @item.FuelType
+            </td>
+            <td>
+                @item.CarManufacturerId
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+    $(document).ready(function () {
+        $("#carsTable").DataTable();
+    });</script>
+}

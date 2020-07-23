@@ -17,7 +17,7 @@ namespace CarStore.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class StoreController : BaseController
     {
         private readonly IStoreService _storeService;

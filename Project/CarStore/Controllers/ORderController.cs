@@ -17,7 +17,7 @@ namespace CarStore.API.Controllers
 {
     [Route("api/store/{storeId}/orders")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class OrderController : BaseController
     {
         private readonly IOrderService _orderService;
