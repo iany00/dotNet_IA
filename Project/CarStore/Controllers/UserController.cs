@@ -21,7 +21,7 @@ namespace CarStore.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class UserController : BaseController
     {
         private readonly IUserService _userService;

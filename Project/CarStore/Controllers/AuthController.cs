@@ -11,10 +11,10 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace CarStore.API.Controllers
 {
+    // This was used before user register/auth was implemented
     [Route("api/auth")]
     [ApiController]
     [ApiExplorerSettings(IgnoreApi = true)]
-    // This was user before user auth was implemented
     public class AuthController : ControllerBase
     {
         [HttpGet("")]
